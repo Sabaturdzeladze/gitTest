@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <!-- user da passwordis chacerisas mxolod post methodi unda gamovikenot -->
+    <!-- form action ='misamarti' -->
+    <!-- for ukavshirdeba igive saxelis id-s -->
+    <form action="" method="POST">
+        <label for="username">Username:<input type="text" name="firstName" placeholder="Username" id="username" required></label> <br>
+        <label for="password">Password:<input type="password" name="Password" placeholder="Last Name" id="password" required></label> <br>
+        <input type="submit" value="Login">
+        <input type="reset" value="reset fields"> <br>
+        
+        <label for="comment">Comment:</label>
+        <textarea name="comment" cols="100" rows="10" style="resize: none;" id="comment"></textarea>
+        <br>
+
+        <button type="submit">Login</button> 
+        <button type="reset">reset fields</button><br>
+        <button type="button" onclick="alert('hello')">Click me</button>
+        <br>
+        <!-- mosanishni archevnebi -->
+        <!-- ert nameianebi inishneba -->
+        <input type="radio" name="gender" value="Male">Male
+        <input type="radio" name="gender" value="Female">Female
+        <input type="radio" name="gender" value="Other">Other
+        <br>
+        <!-- checkbox -->
+        <fieldset>
+        <input type="checkbox" name="bike" value="bike">I have a bike
+        <input type="checkbox" name="bike" value="car">I have a car
+        </fieldset>
+        <br>
+        <!-- select options -->
+        <label>Select Car</label>
+        <select name="cars[]" id="cars" size="1">   <!-- masivis nishani [] sachiroa -->
+            <option value="">Select Cars</option>
+            <option value="bmw" selected>BMW</option> 
+            <option value="vw">VW</option>
+            <option value="mercedes">Mercedes</option>
+            <option value="pagani">Pagani</option>
+            <option value="dedistraki">DedisTraki</option>
+        </select>
+
+
+    </form>
+</body>
+</html>
