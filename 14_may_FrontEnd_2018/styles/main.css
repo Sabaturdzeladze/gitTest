@@ -1,0 +1,84 @@
+/* kvelafers anichebs witel fers */
+*{
+    color: red;
+}
+
+h2{
+    color: blue;
+}
+
+/* listshi mdebare h2 */
+li h2 {
+    color: green;
+}
+
+/* id-is monishvna xdeba #-it */
+#myItem1 {
+    color: limegreen;
+}
+/* classis monishvna . -it */
+.myItem {
+    color: navy;
+}
+
+li.myItem {
+    color: orange;
+}
+/* atributebis monishvna [] */
+[data-modal='open'] {
+    background-color: blueviolet;
+    padding: 13px;
+    color: white;
+}
+/* > mimartavs shvils */
+ul.menu > li{
+    display: inline-block;
+    padding: 5px;
+}
+/* menu-s classit listis pirvels mivmartavt
+ul.menu > li:first-child {
+    font-size: 20px;
+    font-weight: 700;
+}
+ul.menu > li:last-child a {
+    font-size: 20px;
+    font-weight: 700;
+    color: black;
+}
+meores da mesames mianichebs, (me-n-e shvils)
+ul.menu > li:nth-child(3) a,
+ul.menu > li:nth-child(2) a {
+    font-size: 20px;
+    font-weight: 700;
+    color: blue;
+} */
+
+/* 1 nishnavs im adgilidan dackebas, anu pirvelidan dackebuli koveli meore icvleba */
+ul.menu > li:nth-child(2n+1) a {
+    font-size: 20px;
+    font-weight: 700;
+    color: limegreen
+}
+
+/* myclass:empty {
+
+} */
+/* kvela paragraps nishnavs romelic romelime paragrapis shemdeg modis. */
+p + p {
+    cursor: pointer;
+    font-size: 15px;
+    color: black;
+}
+/* par1 - id ianis shemdeg kvela p-s cvlis */
+#par1 ~ p {
+    color: black;
+    padding: 10px;
+}
+/* mausis gadatareba - hover */
+#par1 ~ p:hover {
+    background-color: rgba(0, 0, 255, 0.671)
+}
+
+#par1 ~ p:active {
+    background-color: rgba(255, 0, 0, 0.671)
+}

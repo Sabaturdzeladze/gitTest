@@ -1,0 +1,57 @@
+/* saerto divshi ver vadzlevdi heights da ratom? */
+div {
+    display: inline-block;
+}
+
+#div1 {
+    background-color: red;
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+}
+
+#div2 {
+    background-color: yellow;
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+}
+
+#div3 {
+    background-color: green;
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+}
+
+#div4 {
+    background-color: blue;
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+}
+
+#div5 {
+    background-color: black;
+    width: 150px;
+    height: 120px;
+    border-radius: 40%;
+}
+
+#div1:hover ~ #div5{
+    background-color: red;
+}
+
+#div2:hover ~ #div5{
+    background-color: yellow;
+}
+
+#div3:hover ~ #div5{
+    background-color: green;
+}
+
+#div4:hover ~ #div5{
+    background-color: blue;
+}
+
+
