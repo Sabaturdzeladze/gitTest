@@ -1,4 +1,83 @@
-body {
-    background-color: #ff0000a4;
-    background-color: rgba(255, 0, 0, .9);
+* {
+    box-sizing: border-box;
+}
+
+/* body { */
+    /* background-color: #ff0000a4;
+    background-color: rgba(255, 0, 0, .5);
+    background-image: url(;
+    background-repeat: no-repeat;
+    background-position: right 25px;
+    background-attachment: fixed; */
+    /* 25px zemodan chamocevs */
+    /* margin-left: 100px; */
+    /* background: rgba(255, 0, 0, .5) url(../images/bricks.png) no-repeat fixed right top; */
+    /* backgrounds argebs browsers */
+    /* background-size: cover; */
+/* } */
+
+
+.box {
+    /* display: none;
+    visibility: hidden; */
+    display: block;
+    width: 200px;
+    height: 200px;
+    background-color: blueviolet;
+    font-size: 2em;
+    color: white;
+    text-align: center;
+    /* centrshi vascorebt */
+    line-height: 200px;
+    /* padding-top: 20px; */
+    /* padding-bottom: 20px; */
+    box-sizing: border-box;
+    margin-left: 100px;
+    margin-top: 50px;
+
+    /* border: 5px solid grey; */
+    outline: 5px solid green;
+
+}
+
+p.box--border__style {
+    border: 10px #333;
+    /* border-style: solid dotted; */
+    border-style: solid;
+    /* solid, dotted, dashed, groove, double, inset, outset,  */
+    padding: 13px;
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    /* border-width: 5px 3px 6px 9px; */
+    border-color: aqua blue khaki hotpink;
+    border-width: 10px;
+    border-radius: 10px;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+}
+
+#border-box, 
+#padding-box, 
+#content-box {
+    background-color: yellowgreen;
+    width: 225px;
+    padding: 1em 0;
+    border: 5px solid red;
+}
+
+.nomargin {
+    margin: 0;
+}
+
+#border-box {
+    background-clip: border-box;
+}
+
+#padding-box {
+    background-clip: padding-box;
+}
+
+#content-box {
+    background-clip: content-box;
 }
