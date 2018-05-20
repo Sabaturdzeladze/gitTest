@@ -1,0 +1,31 @@
+div {
+    display: inline-block;
+}
+
+div.left {
+    width:  300px;
+    float: left;
+}
+img {
+    width:  250px;
+}
+p {
+    clear: both;
+}
+.size{
+    width: 800px;
+}
+div.center {
+    margin: 0 auto;
+    width: 500px;
+}
+footer{
+    background-color: green;
+    color: white;
+    height: 100px;
+}
+
+.right {
+    float: right;
+}
+

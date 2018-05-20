@@ -1,0 +1,68 @@
+body {
+    color: blue;
+}
+
+h1 {
+    color: red;
+}
+/* !important */
+h2.center {
+    text-align: center;
+}
+h2.left {
+    text-align: left;
+}
+h2.right {
+    text-align: right;
+}
+
+/* justify mtel xazze mocesrigebulad gacelva, (ufro did tekstebze gamoikeneba) */
+div {
+    border: 1px solid black;
+    padding: 10px;
+    width: 200px;
+    height: 120px;
+    text-align: justify;
+}
+
+h2.overline {
+    text-decoration: overline;
+}
+h2.linethrough {
+    text-decoration: line-through;
+}
+h2.underline {
+    text-decoration: underline;
+}
+/* ------------------------------------------------------ */
+/* Pseudo Elements */
+
+div.elements {
+    width: 200px;
+    height: 200px;
+    background-color: blue;
+    color: white;
+    font-size: 1.2em;
+    font-weight: 900;
+    text-align: center;
+    line-height: 200px;
+
+    margin-bottom: 200px;
+}
+
+.elements:hover::before {
+    content: 'HTML';
+    width: 100%;
+    height: 100%;
+    color: red;
+}
+.elements:hover::after {
+    content: 'JS(ES6)';
+    width: 100%;
+    height: 100%;
+    color: aqua;
+}
+i.fa.fa-cloud {
+    color: gold;
+}
+

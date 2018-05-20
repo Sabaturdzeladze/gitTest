@@ -1,0 +1,55 @@
+/* left, right, top, bottom */
+/* static defaultia */
+div.static {
+    position: static;
+    border: 3px solid green;
+}
+
+div.relative {
+    position: relative;
+    border: 3px solid red;
+    left: 0px;
+    top: 0px;
+}
+
+div.relative2 {
+    position: relative;
+    width: 600px;
+    height: 300px;
+    border: 3px solid grey;
+    margin-top: 20px;
+}
+/* absolute sawkis wertils edzebs mshoblis tag-shi */
+div.absolute {
+    position: absolute;
+    border: 3px solid blue;
+
+    height: 100px;
+    width: 400px;
+    top:    0px;
+    right: 0px;
+    cursor: pointer;
+    display: none;
+    /* display none fizikurad akrobs am divs */
+}
+
+div.relative2:hover > div.absolute {
+    display: block;
+}
+
+div.fixed {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 300px;
+    height: 200px;
+    border: 3px solid lightblue;
+}
+
+img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100px;
+    z-index: -1;
+}
