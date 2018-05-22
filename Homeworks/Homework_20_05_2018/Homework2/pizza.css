@@ -29,3 +29,33 @@ footer{
     float: right;
 }
 
+/* .container {
+    display: inline-block;
+}
+
+nav {
+    float: left;
+    width: 300px;
+}
+
+nav ~ section {
+    width: 300px;
+}
+p,h1 {
+    clear: both;
+}
+img {
+    width: 300px;
+}
+
+section {
+    display: inline-block;
+    width: 300px;
+}
+
+aside {
+    float: right;
+} */
+
+
+

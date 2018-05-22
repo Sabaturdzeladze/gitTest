@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>CSS 101</title>
+    <style>
+        /* auto scrolls adzlevs tu texti contents acharbebs */
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body>div:first-child {
+            width: 250px;
+            height: 100px;
+            background-color: grey;
+            /* overflow-x: auto;
+            overflow-y: auto; */
+            overflow: hidden;
+            /* initial, inherit, unset, auto, scroll, hidden, visible */
+        }
+
+        .outer {
+            border: 5px solid green;
+            border-radius: 5px;
+            width: 450px;
+            padding: 10px;
+            margin-bottom: 40px;
+            border-style: dotted;
+        }
+
+        .float {
+            padding: 10px;
+            border: 5px solid rgb(238, 234, 14);
+            border-radius: 5px;
+            background-color: rgb(238, 234, 14);
+            color: white;
+            float: left;
+            width: 200px;
+            margin: 0 20px 0 0;
+        }
+
+        .overflow {
+            overflow: auto;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt magni, velit dolor doloribus voluptatum placeat repudiandae
+        optio harum. Ratione itaque hic esse amet ipsam numquam? Est debitis quod nobis sunt. Vel labore dolores, excepturi
+        velit magnam quisquam repudiandae delectus ab. Laborum quis blanditiis recusandae et, ad sed obcaecati modi numquam
+        deleniti dicta iste odit, expedita, cum quam placeat praesentium aliquid. Iusto minima laudantium corporis repudiandae
+        excepturi harum dolorum fugit expedita suscipit aliquid dolor sunt aliquam vero, consequatur culpa facere! Vitae
+        odit veritatis necessitatibus voluptatibus laboriosam amet eveniet aliquid harum quisquam!
+    </div>
+
+    <hr>
+    <h2>floated: plenty of text</h2>
+    <div class='outer'>
+        <div class="float">
+            I am floated element
+        </div>
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam, similique. Aspernatur reiciendis nesciunt amet, repellat
+        modi minima earum quisquam sed neque veritatis doloribus eligendi libero delectus molestiae consequuntur. Tempore,
+        quia.Sequi officiis veritatis, nihil aliquam impedit perferendis ab quia laboriosam assumenda quos consectetur quis
+        ut quam quaerat qui. Odit nemo totam similique delectus? Dignissimos assumenda fugit ullam laborum itaque sequi?
+    </div>
+        <h2>floated: not enough text</h2>
+        <div class='outer'>
+            <div class="float">
+                I am floated element
+            </div>
+            consectetur adipisicing elit.
+        </div>
+            <h2>overflow solution</h2>
+            <div class='outer overflow'>
+
+                <div class="float">
+                    I am a floated element
+                </div>
+                the outer text
+            </div>
+</body>
+
+</html>

@@ -1,0 +1,40 @@
+* {
+    margin: 0;
+    padding: 0;
+
+    box-sizing: border-box;
+}
+
+header {
+    background-color: grey;
+    padding: 20px;
+    text-align: center;
+    color: white;
+}
+nav {
+    overflow: hidden;
+    background-color: black;
+}
+nav a {
+    float: left;
+    display: block;
+    color: white;
+    text-align: 15px;
+    text-decoration: none;
+}
+
+nav a:hover {
+    background-color: grey;
+    color: black;
+}
+.column {
+    width: 33%;
+    float: left;
+    padding: 15px;
+}
+footer {
+    background-color: grey;
+    padding: 10px;
+    text-align: center;
+    clear: both;
+}
