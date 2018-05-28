@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>CSS Transforms</title>
+    <style>
+        div {
+            margin: 20px;
+            width: 300px;
+            background-color: chartreuse;
+            height: 100px;
+            border: 1px solid #333;
+        }
+
+        div.translate {
+            /* 50px it marjvniv da 100px it kvemot */
+            transform: translate(100px, 100px);
+        }
+
+        div.rotate {
+            /* 50px it marjvniv da 100px it kvemot */
+            transform: rotate(90deg);
+        }
+
+        div.scale {
+            transform: scale(1, 2);
+        }
+        .skew {
+            transform: skew(-20deg, 10deg);
+        }
+    </style>
+</head>
+
+<body>
+    <h1>CSS Transforms</h1>
+
+    <div class="translate">
+        translate: x: 50px, y: 100px;
+    </div>
+    <div class="rotate">
+        rotate: 90deg;
+    </div>
+    <div class="scale">
+        scale
+    </div>
+    <div class="skew">
+        skew
+    </div>
+</body>
+
+</html>

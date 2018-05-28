@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>davaleba 2</title>
+    <style>
+        .container {
+            border: 2px solid black;
+            height: 100px;
+            padding: 5px;
+        }
+        .inside {
+            width: 100px;
+            height: inherit;
+            animation-name: anim;
+            animation-duration: 8s;
+            background-color: red;
+            box-sizing: border-box;
+            animation-direction: alternate;
+        }
+        @keyframes anim {
+            0% {
+                transform: translate(0px, 0px);
+            }
+            25% {
+                transform: translate(620px,0px);
+                
+            }
+            100% {
+                transform: translate(1236px, 0px);
+            }
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="inside"></div>
+    </div>
+</body>
+</html>

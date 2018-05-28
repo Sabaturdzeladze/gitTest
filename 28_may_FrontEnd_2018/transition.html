@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Transitions</title>
+    <style>
+        div.transition {
+            width: 150px;
+            height: 150px;
+            background-color: royalblue;
+            /* transition-delay:  */
+            /* transition-property: all;
+            transition-duration: 300ms;
+            transition-timing-function: cubic-bezier(.05,.24,.85,.98); */
+            cursor: pointer;
+            transform: translate(1000px, 400px);
+        }
+        /* div:hover {
+            width: 200px;
+            height: 200px;
+            background-color: blue;
+            border-radius: 50%;
+        } */
+        div.transition:hover {
+            background-color: seagreen;
+            transform: translate(100px, 50px) scale(2, 2);
+            border: 2px solid rgba(33, 26, 77);
+            border-radius: 50%;
+            font-size: 1.5em;
+            text-align: center;
+            line-height: 150px;
+        }
+        div.animation {
+            width: 150px;
+            height: 150px;
+            background-color: red;
+            animation-name: myAnimation;
+            animation-duration: 2s;
+            animation-iteration-count: infinite;
+            animation-direction: alternate;
+        }
+
+        @keyframes myAnimation {
+            0% {
+                background-color: red;
+            }
+            25% {
+                background-color: yellow;
+            }
+            50% {
+                background-color: blue;
+            }
+            100% {
+                background-color: green;
+                width: 200px;
+                height: 200px;
+            }
+        }
+
+        div.banner {
+            background-color: seagreen;
+            position: absolute;
+            left: calc(40px);
+            width: calc(100% - 80px);
+            border: 1px solid #333;
+            box-shadow: 1px 2px;
+            text-align: center;
+            box-sizing: border-box;
+            color: #fff;
+            padding: 15px;
+            /* height: 100px; */
+        }
+    </style>
+</head>
+<body>
+    <div class="banner">This is Banner</div>
+    <div class="transition">
+        Transition Box
+    </div>
+    <hr>
+    <div class="animation"></div>
+</body>
+</html>
