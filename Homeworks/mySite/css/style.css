@@ -34,6 +34,7 @@ body {
 div.wrapper {
     background-image: url(../images/bokeh_car_lights_bg.jpg);
     background-repeat: no-repeat;
+    background-size: 100%;
     width: 100%;
     margin: 0;
     padding: 0;
