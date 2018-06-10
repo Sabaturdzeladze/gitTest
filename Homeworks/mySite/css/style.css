@@ -1,0 +1,64 @@
+* {
+    font-family: arimo, sans-serif;
+}
+body {
+    width: 100%;
+    margin: 0;
+    display: grid;
+    grid-template-columns: 8% auto auto auto 8%;
+    grid-auto-rows: minmax(150px, auto);
+    grid-template-areas: 
+    "header header header header header"
+    "header header header header header"
+    "header header header header header"
+    "header header header header header"
+    ". main main main ."
+    ". main main main ."
+    ". main main main ."
+    ". . . . ."
+    ". users users users ."
+    ". users users users ."
+    ". users users users ."
+    ". users users users ."
+    ". users users users ."
+    "wrapper wrapper wrapper wrapper wrapper"
+    "wrapper wrapper wrapper wrapper wrapper"
+    "wrapper wrapper wrapper wrapper wrapper"
+    "wrapper wrapper wrapper wrapper wrapper"
+    "footer footer footer footer footer"
+    "footer footer footer footer footer"
+    "footer footer footer footer footer"
+    "footer footer footer footer footer"
+}
+
+div.wrapper {
+    background-image: url(../images/bokeh_car_lights_bg.jpg);
+    background-repeat: no-repeat;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    grid-area: header;
+}
+
+main {
+    grid-area: main;
+}
+
+section.users {
+    grid-area: users;
+}
+
+section.wrapper {
+    grid-area: wrapper;
+}
+
+div.before {
+    grid-area: before;
+}
+div.after {
+    grid-area: after;
+}
+
+footer.main-footer {
+    grid-area: footer;
+}

@@ -1,0 +1,58 @@
+main {
+    margin-top: 80px;
+}
+.main-div {
+    text-align: center;
+}
+main h2, section.users h2 {
+    font-size: 2.5em;
+    color: #555;
+}
+main .main-div p, .section-wrapper p {
+    font-size: 1.5em;
+    color: #888;
+    margin-top: -20px;
+    margin-bottom: 100px;
+}
+
+
+/* Sections */
+.box {
+    margin: 0 auto;
+    width: 130px;
+    text-align: center;
+    height: 130px;
+    line-height: 130px;
+    font-size: 2em;
+    color: white;
+    border-radius: 50%;
+    margin-bottom: 30px;
+    /* background-color: #555; */
+}
+
+.main-div1 {
+    background-color: rgb(93, 180, 209);
+}
+.main-div2 {
+    background-color: rgb(142, 216, 108);
+}
+.main-div3 {
+    background-color: rgb(209, 82, 120);
+}
+.main-section {
+    text-align: center;
+    width: 85%;
+    margin: 0 auto;
+}
+.main-section h3 {
+    color: #555;
+}
+.main-section p {
+    line-height: 25px;
+    color: #888;
+}
+
+.main-wrapper {
+    display: flex;
+    justify-content: space-between;
+}

@@ -1,0 +1,57 @@
+section.people {
+    display: flex;
+    justify-content: space-between;
+}
+.people div {
+    width: 23%;
+}
+.section-wrapper {
+    text-align: center;
+}
+.people img, .people h3, .people p {
+    display: inline-block;
+}
+.people img {
+    border-radius: 50px;
+}
+div.relative {
+    position: relative;
+}
+.people h3 {
+    position: absolute;
+    margin: 20px 0 0 10px;
+    font-size: 1em;
+    color: #555;
+}
+.people p {
+    position: absolute;
+    color: #777;
+    top: 35px;
+    margin-left: 10px;
+}
+
+.users footer {
+    text-align: center;
+    margin-top: 100px;
+    color: #555;
+    line-height: 30px;
+}
+div.section-footer-link {
+    width: 30%;
+    margin: 40px auto 0;
+    background-color: rgb(61, 167, 202);
+    height: 60px;
+    line-height: 60px;
+    font-size: 1.5em;
+    border-radius: 60px;
+}
+.users a {
+    text-decoration: none;
+    color: white;
+    display: block;
+    height: 100%;
+    border-radius: 60px;
+}
+.users a:hover {
+    background-color: rgb(88, 184, 216);
+}
