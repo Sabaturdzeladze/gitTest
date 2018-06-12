@@ -176,6 +176,8 @@ header {
 }
 #main-nav a {
 	color: white;
+	display: block;
+	height: 100%;
 }
 
 .hero {
@@ -244,6 +246,9 @@ div.container > * {
 }
 div.container .container1 a, div.container .container2 a, div.container .container3 h2 {
 	color: rgb(11, 178, 255);
+}
+div.container1, .container2, .container3 {
+	background-color: rgb(228, 222, 222);
 }
 div.container > div, .container > section {
 	margin-bottom: 30px;
