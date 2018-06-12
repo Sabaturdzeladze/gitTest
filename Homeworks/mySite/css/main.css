@@ -1,5 +1,5 @@
 main {
-    margin-top: 80px;
+    margin-top: 50px;
 }
 .main-div {
     text-align: center;
@@ -61,6 +61,6 @@ main .main-div p, .section-wrapper p {
     background-color: #fff;
     border: 1px solid rgb(238, 238, 238);
     padding: 20px 0;
-    border-radius: 2px;
+    border-radius: 5px;
     width: 31%;
 }
