@@ -26,6 +26,45 @@ form .text1 input {
     border-radius: 5px;
     border: 1px solid white;
 }
+
+.text1 input::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+    padding-left: 10px;
+    font-size: 1.3em;
+}
+.text1 input::-moz-placeholder { /* Firefox 19+ */
+    padding-left: 10px;
+    font-size: 1.3em;
+}
+.text1 input:-ms-input-placeholder { /* IE 10+ */
+    padding-left: 10px;
+    font-size: 1.3em;
+}
+.text1 input:-moz-placeholder { /* Firefox 18- */
+    padding-left: 10px;
+    font-size: 1.3em;
+}
+.text1 textarea::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+    padding-left: 10px;
+    padding-top: 7px;
+    font-size: 1.3em;
+}
+.text1 textarea::-moz-placeholder { /* Firefox 19+ */
+    padding-left: 10px;
+    padding-top: 7px;
+    font-size: 1.3em;
+}
+.text1 textarea:-ms-input-placeholder { /* IE 10+ */
+    padding-left: 10px;
+    padding-top: 7px;
+    font-size: 1.3em;
+}
+.text1 textarea:-moz-placeholder { /* Firefox 18- */
+    padding-left: 10px;
+    padding-top: 7px;
+    font-size: 1.3em;
+}
+
+
 .text1 {
     display: flex;
     justify-content: space-between;
