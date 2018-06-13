@@ -1,6 +1,7 @@
 :root{
---yellow: #ffc600;
---black: #282828;
+    --yellow: #ffc600;
+    --black: #282828;
+    --white: rgb(236, 235, 235);
 }
 
 html {
@@ -42,4 +43,3 @@ background-color: var(--yellow);
 .item p{
 margin: 0 0 5px 0;
 }
-
