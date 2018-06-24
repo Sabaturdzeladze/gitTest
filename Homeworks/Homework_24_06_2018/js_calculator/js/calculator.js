@@ -25,7 +25,6 @@ function Calculator(){
 let obj = new Calculator();
 
 alert(obj.calculate(prompt("Enter")));
-debugger
 obj.addOperator("*", (a,b) => a * b);
 obj.addOperator("/", (a,b) => a / b);
 obj.addOperator("**", (a,b) => a ** b);
