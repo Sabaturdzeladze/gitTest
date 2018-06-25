@@ -66,7 +66,6 @@ function Subset(str){
     debugger
     for (let i = 0; i < this.str.length; i++){
         arr[i] = this.str[i];
-        // delete this.str[i];
         for (let k = i + 1; k < this.str.length; k++){
             arr[k] = arr[k-1] + this.str[k];
         }
