@@ -2,7 +2,7 @@ let obj = {
     parentCount: '2',
     tagName: 'ul',
     content: 'aiebcasnjev',
-    bothContent: false,
+    bothContent: true,
     parentContent: false,
     childContent: false,
     selector: '#container',
@@ -23,21 +23,21 @@ let obj = {
 //comment first for loop in the function generateHtml to use default parameters.
 
 function generateHtml(obj) {
-    for (let key in obj) {
-        if (key == "parentContent" || key == "childContent" || key == "bothContent"){
-            if (obj['parentContent'] == false && obj['childContent'] == false && obj['bothContent'] == false){
-                obj[key] = confirm(`your content in ${key}?`);
-            }
-            continue
-        }
-        if (key == 'attributes'){
-            for (let names in obj.attributes) {
-                obj.attributes[names] = prompt(`Enter ${names}`);
-            }
-            break
-        }
-        obj[key] = prompt(`enter the ${key}: `);
-    }
+    // for (let key in obj) {
+    //     if (key == "parentContent" || key == "childContent" || key == "bothContent"){
+    //         if (obj['parentContent'] == false && obj['childContent'] == false && obj['bothContent'] == false){
+    //             obj[key] = confirm(`your content in ${key}?`);
+    //         }
+    //         continue
+    //     }
+    //     if (key == 'attributes'){
+    //         for (let names in obj.attributes) {
+    //             obj.attributes[names] = prompt(`Enter ${names}`);
+    //         }
+    //         break
+    //     }
+    //     obj[key] = prompt(`enter the ${key}: `);
+    // }
     obj.parentCount = Number(obj.parentCount)
     obj.childCount = Number(obj.childCount)
     let selector = document.querySelector(obj.selector);
@@ -52,6 +52,7 @@ function generateHtml(obj) {
         for (let k = 0; k < obj.childCount; k++){
             let child = document.createElement(obj.childElement);
             tag.appendChild(child);
+            // tag.textContent = obj.content;
             
             if (obj['bothContent'] == true || obj['childContent'] == true){
                 child.textContent = obj.content;
