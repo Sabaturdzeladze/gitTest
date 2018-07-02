@@ -1,0 +1,163 @@
+* {
+    box-sizing: border-box;
+}
+
+/* Styling header */
+.container {
+    display: flex;
+}
+header {
+    width: 200px;
+}
+header h1 {
+    font-size: 1.5em;
+    color: grey;
+    width: 200px;
+}
+header ul {
+    padding-left: 0;
+}
+header ul li {
+    list-style-type: none;
+    padding: 5px 0;
+    font-weight: 900;
+}
+
+#total-days {
+    margin-left: 50px;
+}
+#missed {
+    margin-left: 17px;
+}
+#total-average {
+    margin-left: 25px;
+}
+#total-students {
+    margin-left: 22px;
+}
+
+
+/* Table Container */
+#table-container {
+    display: grid;
+    grid-auto-columns: minmax(50px, auto);
+    grid-template-rows: repeat(12, 30px);
+}
+
+
+#events {
+    grid-column: 1 / 10;
+    grid-row: 1 / 2;
+    display: flex;
+    background-color: white;
+    border-bottom: 1px solid white;
+}
+
+#names {
+    grid-column: 1 / 4;
+    grid-row: 2 / 13;
+    background-color: red;
+}
+
+#average {
+    grid-column: 4 / 5;
+    grid-row: 2 / 13;
+    color: white;
+}
+#dates {
+    grid-column: 5 / 10;
+    grid-row: 2 / 3;
+}
+
+#values {
+    grid-column: 5 / 10;
+    grid-row: 3 / 13;
+}
+
+/* sorting dates on one line */
+#dates {
+    display: flex;
+}
+#values { 
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 10px;
+}
+#names div, #dates, #average div, #values div {
+    height: 40px;
+}
+
+
+#dates { 
+    font-size: 0.9em;
+    text-align: center;
+}
+
+#dates div, .marks-wrapper div {
+    width: 80px;
+    text-align: center;
+    height: 100%;
+    
+}
+.marks-wrapper { 
+    display: flex;
+    /* flex-wrap: wrap; */
+    width: 100%;
+}
+#average {
+    text-align: center;
+}
+
+
+/* styling events div */
+#events h2 {
+    margin: 0 200px 0 0;
+}
+
+#events div {
+    color: white;
+    line-height: 30px;
+    margin-right: 2px;
+}
+
+/* styling table container */
+#average div{
+    background-color: rgb(15, 129, 120);
+}
+#average div, #names div, #dates div, #values div{
+    /* border: 1px solid white; */
+    line-height: 40px;
+    border-right: 1px solid white;
+    border-bottom: 1px solid white;
+}
+/* #values div {
+    line-height: 40px;
+} */
+#names div {
+    background-color: #999;
+}
+#values div.marks-wrapper div, #dates div {
+    background-color: seagreen;
+    color: white;
+}
+
+
+/* Styling add-day remove-day update-table */
+#add-day {
+    border-radius: 5px;
+    background-color: rgb(96, 214, 96);
+    padding: 0 8px;
+    cursor: pointer;
+}
+#remove-day {
+    cursor: pointer;
+    border-radius: 5px;
+    background-color: rgb(211, 37, 37);
+    padding: 0 8px;
+}
+#update-table {
+    cursor: pointer;
+    border-radius: 5px;
+    background-color: rgb(7, 10, 170);
+    padding: 0 8px;
+}
