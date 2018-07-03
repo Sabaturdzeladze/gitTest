@@ -186,21 +186,26 @@ function addAverages(arr){
 }
 addAverages(studentsArray);
 
-function changeAverages (arr){
+function changeAverages (){
     let average = document.querySelectorAll(".average");
     let arr0 = [];
-    for (let item of average){
+    for (let item of average){      // saved .average divs to arr0
         arr0.push(item);
     }
-    // console.log(arr0);
     let arr1 = [];
-    for (let k = 0; k < arr.length; k++){
-        arr1[k] = arr[k].average()
+    let parent = document.querySelectorAll(".marks-wrapper")
+    for (let i of parent){         // saved marks-wrappers in arr1
+        arr1.push(i);
     }
-    // console.log(arr1);
-    
-    for (let i = 0; i < arr1.length; i++){
-        arr0[i].textContent = arr1[i].toFixed(2); 
+
+    for (let att in arr1){
+        let sum = 0;
+        let count = 0;
+        for(let z = 0; z < Array.from(arr1[att].children).length; z++){     // change arr1[att].children to array, to iterate through it
+            sum += Number(Array.from(arr1[att].children)[z].textContent);
+            count++;
+        }
+        arr0[att].textContent = (sum/count).toFixed(2);
     }
 }
 // changeAverages(studentsArray)
@@ -213,7 +218,6 @@ function changeTotalAverage(){
     for (let item of average){
         arr0.push(Number(item.textContent));
     }
-    debugger
     let totalAverage = document.querySelector("#total-average");
     let sum = 0;
     let count = 0;    
@@ -237,15 +241,8 @@ totalDays();
 
 
 // Missed Lessons
-function missedLessons(/* arr */){
+function missedLessons(){
     let missed = 0;
-    // for (let name of arr){
-    //     for (let key in name.mark){
-    //         if (name.mark[key] == 0){
-    //             missed++;
-    //         }
-    //     }
-    // }
     let marks = document.querySelectorAll(".marks-wrapper div")
     let arr = [];
     let childArr = [];
@@ -253,7 +250,7 @@ function missedLessons(/* arr */){
         arr.push(item)      
     }
     for (let i in arr){
-        // debugger
+
         if(Number(arr[i].textContent) == 0){
             missed++;
         }
@@ -324,15 +321,12 @@ addDayEvent.addEventListener('click', function (){
         div.textContent = text;
         marksWrapper[k].appendChild(div);
     }
-    console.log(studentsArray);
     
     styleZeros();
     totalDays();
-    missedLessons(/* studentsArray */);
-    // totalAverage(studentsArray);
-    changeAverages(studentsArray)
+    missedLessons();
+    changeAverages()
     changeTotalAverage()
-    // console.log(studentsArray[0].mark);
 });
 
 
@@ -354,6 +348,7 @@ removeDay.addEventListener('click', function(){
     styleZeros();
     totalDays();
     missedLessons();
+    changeAverages()
     changeTotalAverage()
 })
 
@@ -367,10 +362,12 @@ function styleZeros(){
         arr.push(item)      
     }
     for (let i in arr){
-        // debugger
+
         if(Number(arr[i].textContent) == 0){
             arr[i].style.backgroundColor = 'red';           
         }
     }    
 }
 styleZeros()
+
+
