@@ -1,6 +1,6 @@
-* {
+/* * {
     box-sizing: border-box;
-}
+} */
 
 /* Styling header */
 .container {
@@ -41,7 +41,7 @@ header ul li {
 #table-container {
     display: grid;
     grid-auto-columns: minmax(50px, auto);
-    grid-template-rows: repeat(12, 30px);
+    grid-template-rows: repeat(12, auto);
 }
 
 
@@ -56,7 +56,7 @@ header ul li {
 #names {
     grid-column: 1 / 4;
     grid-row: 2 / 13;
-    background-color: red;
+    /* background-color: red; */
 }
 
 #average {
@@ -64,24 +64,21 @@ header ul li {
     grid-row: 2 / 13;
     color: white;
 }
-#dates {
+.overflow-wrapper {
     grid-column: 5 / 10;
-    grid-row: 2 / 3;
-}
-
-#values {
-    grid-column: 5 / 10;
-    grid-row: 3 / 13;
+    grid-row: 2 / 13;
+    overflow-x: auto;
 }
 
 /* sorting dates on one line */
 #dates {
     display: flex;
+    border-bottom: 1px solid white;
+    border-left: 1px solid white;
 }
 #values { 
     display: flex;
     flex-wrap: wrap;
-    margin-top: 10px;
 }
 #names div, #dates, #average div, #values div {
     height: 40px;
@@ -97,7 +94,10 @@ header ul li {
     width: 80px;
     text-align: center;
     height: 100%;
-    
+}
+.marks-wrapper div:hover {
+    cursor: pointer;
+    background-color: rgb(39, 93, 163);
 }
 .marks-wrapper { 
     display: flex;
@@ -123,12 +123,13 @@ header ul li {
 /* styling table container */
 #average div{
     background-color: rgb(15, 129, 120);
+    overflow: hidden;
 }
 #average div, #names div, #dates div, #values div{
-    /* border: 1px solid white; */
+    border: 1px solid white;
     line-height: 40px;
-    border-right: 1px solid white;
-    border-bottom: 1px solid white;
+    /* border-right: 1px solid white;
+    border-bottom: 1px solid white; */
 }
 /* #values div {
     line-height: 40px;
