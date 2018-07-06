@@ -294,18 +294,11 @@ let addDayEvent = document.querySelector("#add-day");
 addDayEvent.addEventListener('click', function () {
     // let previousDay = document.querySelector("#dates:last-child");
     let previousDayDiv = document.querySelector("#dates");
-    // let previousDay = previousDayDiv.children[previousDayDiv.children.length - 1];
-    // let arr = previousDay.textContent.split(' ')
-    // arr = arr[2] + '-' + arr[1];
-    // previousDay = new Date(`2018-${arr}`);
-    // previousDay.setDate(previousDay.getDate() + 1)
-    // let count = 0;
     if (previousDayDiv.children.length == 0) {
         let start = new Date('2018-04-30')
         generateDays(start, 2);
     }
     else {
-        // let previousDayDiv = document.querySelector("#dates");
         let previousDay = previousDayDiv.children[previousDayDiv.children.length - 1];
         let arr = previousDay.textContent.split(' ')
         arr = arr[2] + '-' + arr[1];
@@ -344,7 +337,8 @@ addDayEvent.addEventListener('click', function () {
     changeAverages();
     changeTotalAverage();
     addEventToMarks();
-    styleValues()
+    styleValues();
+    overflow();
 });
 
 
@@ -367,6 +361,7 @@ removeDay.addEventListener('click', function () {
     missedLessons();
     changeAverages();
     changeTotalAverage();
+    hideOverflow();
 })
 
 
@@ -453,5 +448,21 @@ function addEventToMarks() {
             changeTotalAverage();
             styleValues()
         });
+    }
+}
+
+function hideOverflow(){
+    let dateCount = document.querySelector("#dates").children.length;
+    if (dateCount < 3){
+        let overflow = document.querySelector(".overflow-wrapper");
+        overflow.style.overflow = 'hidden';
+    }
+}
+
+function overflow(){
+    let dateCount = document.querySelector("#dates").children.length;
+    if (dateCount >= 3){
+        let overflow = document.querySelector(".overflow-wrapper");
+        overflow.style.overflowX = 'auto';
     }
 }
