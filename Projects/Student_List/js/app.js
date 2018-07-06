@@ -10,6 +10,7 @@ let average = function () {
 }
 
 //  Creating Students as objects
+// #region objects
 let wayne = {
     name: 'Wayne Rooney',
     mark: {
@@ -120,12 +121,13 @@ let jaba = {
     },
     average,
 }
+//#endregion
 
 // Saving students in Array
 let studentsArray = [wayne, alex, owen, rio, michael, wes, cristiano, nani, patrice, jaba]
 
 
-// Date
+// #region Date
 // creating divs with the text of Days inside #dates div
 function generateDays(start, num) {
     for (let i = 0; i < num; i++) {
@@ -141,7 +143,7 @@ function generateDays(start, num) {
     }
 }
 let startDate = new Date('2018-04-30');
-generateDays(startDate, 10)
+generateDays(startDate, 10);
 
 // creating divs with students names + appending the #names div
 function addStudentsNames(arr) {
@@ -300,6 +302,8 @@ addDayEvent.addEventListener('click', function () {
     }
     else {
         let previousDay = previousDayDiv.children[previousDayDiv.children.length - 1];
+        console.log(previousDayDiv.children.length - 1);
+        
         let arr = previousDay.textContent.split(' ')
         arr = arr[2] + '-' + arr[1];
         previousDay = new Date(`2018-${arr}`);
