@@ -65,9 +65,14 @@ header ul li {
     color: white;
 }
 .overflow-wrapper {
-    grid-column: 5 / 10;
+    grid-column: 5 / 9;
     grid-row: 2 / 13;
-    overflow-x: auto;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-auto-rows: minmax(41px, 42px);
+    /* grid-template-rows: 1fr; */
+    overflow: auto;
+    overflow-y: hidden;
 }
 
 /* sorting dates on one line */
@@ -78,7 +83,9 @@ header ul li {
 }
 #values { 
     display: flex;
+    flex-direction: column;         /*  */
     flex-wrap: wrap;
+    grid-row: 2 / 12;
 }
 #names div, #dates, #average div, #values div {
     height: 40px;
@@ -98,6 +105,9 @@ header ul li {
 .marks-wrapper div:hover {
     cursor: pointer;
     background-color: rgb(39, 93, 163);
+}
+#values .marks-wrapper div {
+    border-top: 0;
 }
 .marks-wrapper { 
     display: flex;
@@ -131,9 +141,6 @@ header ul li {
     /* border-right: 1px solid white;
     border-bottom: 1px solid white; */
 }
-/* #values div {
-    line-height: 40px;
-} */
 #names div {
     background-color: #999;
 }
@@ -161,4 +168,43 @@ header ul li {
     border-radius: 5px;
     background-color: rgb(7, 10, 170);
     padding: 0 8px;
+}
+
+
+/* Responsiveness */
+
+@media screen and (max-width: 900px){
+    /* body {
+        width: 100%;
+    } */
+    .container {
+        flex-wrap: wrap;
+    }
+    header {
+        width: 100%;
+    }
+    header h1 {
+        width: 100%;
+        text-align: center;
+        font-size: 2em;
+    }
+    header ul {
+        display: flex;
+        justify-content: space-around;
+    }
+    .overflow-wrapper {
+        grid-column: 5/10;
+    }
+    #missed, #total-days, #total-average, #total-students {
+        margin-left: 5px;
+    }
+}
+
+@media screen and (max-width: 580px){
+    #events h2 {
+        margin-right: 100px;
+    }
+    header ul {
+        display: block;
+    }
 }

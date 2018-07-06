@@ -180,7 +180,7 @@ function addAverages(arr) {
     for (let name of arr) {
         let div = document.createElement('div');
         div.setAttribute('class', 'average');
-        div.textContent = name.average();
+        div.textContent = name.average().toFixed(2);
         parent.appendChild(div);
     }
 }
