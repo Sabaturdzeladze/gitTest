@@ -188,6 +188,8 @@ function addAverages(arr) {
 }
 addAverages(studentsArray);
 
+// Changing averages
+// This function is added in removeDay and addDay functions, for automatization
 function changeAverages() {
     let average = document.querySelectorAll(".average");
     let arr0 = [];
@@ -206,10 +208,10 @@ function changeAverages() {
         for (let z = 0; z < Array.from(arr1[att].children).length; z++) {     // change arr1[att].children to array, to iterate through it
             sum += Number(Array.from(arr1[att].children)[z].textContent);
             count++;
-        }    
-        if(isNaN(sum/count)){
+        }
+        if (isNaN(sum / count)) {
             arr0[att].textContent = '0';
-        }else{
+        } else {
             arr0[att].textContent = (sum / count).toFixed(2);
         }
     }
@@ -236,7 +238,7 @@ function changeTotalAverage() {
 }
 
 
-// Total days
+// Counting Total days
 function totalDays() {
     let dates = document.querySelector("#dates");
     let totalDays = document.querySelector("#total-days");
@@ -302,12 +304,15 @@ addDayEvent.addEventListener('click', function () {
     }
     else {
         let previousDay = previousDayDiv.children[previousDayDiv.children.length - 1];
-        console.log(previousDayDiv.children.length - 1);
-        
+        // console.log(previousDayDiv.children.length - 1);
+        console.log(previousDay);
+        debugger
         let arr = previousDay.textContent.split(' ')
-        arr = arr[2] + '-' + arr[1];
-        previousDay = new Date(`2018-${arr}`);
+        // arr = arr[2] + '-' + arr[1];
+        arr = arr[1] + ' ' + arr[2];
+        previousDay = new Date(`2018 ${arr}`);
         previousDay.setDate(previousDay.getDate() + 1)
+
         let count = 0;
         for (let i = 0; i < 3; i++) {        // adding the next day
             if (count != 0) {
@@ -350,16 +355,21 @@ addDayEvent.addEventListener('click', function () {
 let removeDay = document.querySelector("#remove-day");
 removeDay.addEventListener('click', function () {
     let dates = document.querySelectorAll("#dates div");
-    let parent = document.querySelector("#dates");
-    parent.removeChild(dates[dates.length - 1]);
-    let marks = document.querySelectorAll(".marks-wrapper")
-    let arr = [];
-    for (let item of marks) {       // added marks-wrapper divs to a new arr
-        arr.push(item)
+    if (dates.length > 0) {
+        let parent = document.querySelector("#dates");
+        parent.removeChild(dates[dates.length - 1]);
+        let marks = document.querySelectorAll(".marks-wrapper")
+        let arr = [];
+        for (let item of marks) {       // added marks-wrapper divs to a new arr
+            arr.push(item)
+        }
+        for (let i = 0; i < arr.length; i++) {
+            let son = arr[i].lastChild;
+            arr[i].removeChild(son);
+        }
     }
-    for (let i = 0; i < arr.length; i++) {
-        let son = arr[i].lastChild;
-        arr[i].removeChild(son);
+    else { 
+        alert("There is no day to remove!");
     }
     totalDays();
     missedLessons();
@@ -385,6 +395,7 @@ function styleZeros() {
 }
 styleZeros()
 
+// styling values
 function styleValues() {
     let marks = document.querySelectorAll(".marks-wrapper div")
     let arr = [];
@@ -392,13 +403,13 @@ function styleValues() {
         arr.push(item)
     }
     for (let i in arr) {
-
         if (Number(arr[i].textContent) != 0) {
             arr[i].style.backgroundColor = 'seagreen';
         }
     }
 }
 
+// Adding events to every mark at the beginning 
 function addEventToAllMarks() {
     let marksArray = document.querySelectorAll(".marks-wrapper div");
     for (let item of marksArray) {
@@ -425,6 +436,8 @@ function addEventToAllMarks() {
 }
 addEventToAllMarks()
 
+
+// Adding events to the marks, that the user added
 function addEventToMarks() {
     let marks = document.querySelectorAll(".marks-wrapper")
     let arr = [];
@@ -455,17 +468,22 @@ function addEventToMarks() {
     }
 }
 
-function hideOverflow(){
+
+// Hiding scrollbar if the days are less than 3
+// This function is called only in remove day function
+function hideOverflow() {
     let dateCount = document.querySelector("#dates").children.length;
-    if (dateCount < 3){
+    if (dateCount < 3) {
         let overflow = document.querySelector(".overflow-wrapper");
         overflow.style.overflow = 'hidden';
     }
 }
 
-function overflow(){
+// adding scrollbar if the days are more than 2
+// This function is called only in add day function
+function overflow() {
     let dateCount = document.querySelector("#dates").children.length;
-    if (dateCount >= 3){
+    if (dateCount >= 3) {
         let overflow = document.querySelector(".overflow-wrapper");
         overflow.style.overflowX = 'auto';
     }
