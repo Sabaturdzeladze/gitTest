@@ -268,7 +268,7 @@ function missedLessons() {
     missedLessons.textContent = missed;
 }
 
-missedLessons(/* studentsArray */);
+missedLessons();
 
 
 // Total Average
@@ -296,7 +296,7 @@ totalStudent(studentsArray)
 
 let addDayEvent = document.querySelector("#add-day");
 addDayEvent.addEventListener('click', function () {
-    // let previousDay = document.querySelector("#dates:last-child");
+    // let previousDay = document.querySelector("#dates:last-child");   // doesn't select the last child: ?
     let previousDayDiv = document.querySelector("#dates");
     if (previousDayDiv.children.length == 0) {
         let start = new Date('2018-04-30')
@@ -304,11 +304,8 @@ addDayEvent.addEventListener('click', function () {
     }
     else {
         let previousDay = previousDayDiv.children[previousDayDiv.children.length - 1];
-        // console.log(previousDayDiv.children.length - 1);
         console.log(previousDay);
-        debugger
         let arr = previousDay.textContent.split(' ')
-        // arr = arr[2] + '-' + arr[1];
         arr = arr[1] + ' ' + arr[2];
         previousDay = new Date(`2018 ${arr}`);
         previousDay.setDate(previousDay.getDate() + 1)
