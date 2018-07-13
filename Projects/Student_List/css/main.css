@@ -142,6 +142,7 @@ header ul li {
 }
 #names div {
     background-color: #999;
+    padding-left: 8px;
 }
 #values div.marks-wrapper div, #dates div {
     background-color: seagreen;

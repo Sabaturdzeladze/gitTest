@@ -191,28 +191,29 @@ addAverages(studentsArray);
 // Changing averages
 // This function is added in removeDay and addDay functions, for automatization
 function changeAverages() {
-    let average = document.querySelectorAll(".average");
-    let arr0 = [];
-    for (let item of average) {      // saved .average divs to arr0
-        arr0.push(item);
-    }
-    let arr1 = [];
-    let parent = document.querySelectorAll(".marks-wrapper")
-    for (let i of parent) {         // saved marks-wrappers in arr1
-        arr1.push(i);
-    }
+    // let average = document.querySelectorAll(".average");
+    let average = Array.from(document.querySelectorAll(".average"));
+    // let arr0 = [];
+    // for (let item of average) {      // saved .average divs to arr0
+    //     arr0.push(item);
+    // }
+    // let arr1 = [];
+    let parent = Array.from(document.querySelectorAll(".marks-wrapper"));
+    // for (let i of parent) {         // saved marks-wrappers in arr1
+    //     arr1.push(i);
+    // } 
 
-    for (let att in arr1) {
+    for (let att in parent) {
         let sum = 0;
         let count = 0;
-        for (let z = 0; z < Array.from(arr1[att].children).length; z++) {     // change arr1[att].children to array, to iterate through it
-            sum += Number(Array.from(arr1[att].children)[z].textContent);
+        for (let z = 0; z < Array.from(parent[att].children).length; z++) {     // change arr1[att].children to array, to iterate through it
+            sum += Number(Array.from(parent[att].children)[z].textContent);
             count++;
         }
         if (isNaN(sum / count)) {
-            arr0[att].textContent = '0';
+            average[att].textContent = '0';
         } else {
-            arr0[att].textContent = (sum / count).toFixed(2);
+            average[att].textContent = (sum / count).toFixed(2);
         }
     }
 }
@@ -365,7 +366,7 @@ removeDay.addEventListener('click', function () {
             arr[i].removeChild(son);
         }
     }
-    else { 
+    else {
         alert("There is no day to remove!");
     }
     totalDays();
@@ -485,3 +486,13 @@ function overflow() {
         overflow.style.overflowX = 'auto';
     }
 }
+
+let update = document.querySelector("#update-table")
+update.addEventListener("click", () => {
+    styleZeros();
+    totalDays();
+    missedLessons();
+    changeAverages();
+    changeTotalAverage();
+    styleValues()
+})
