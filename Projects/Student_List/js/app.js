@@ -412,7 +412,7 @@ function addEventToAllMarks() {
     let marksArray = document.querySelectorAll(".marks-wrapper div");
     for (let item of marksArray) {
         item.addEventListener("click", function (event) {
-            let prom = prompt("Enter mark");
+            let prom = parseInt(prompt("Enter mark"));
             if (Number(prom) < 0) {
                 prom = "0";
             }
@@ -445,7 +445,7 @@ function addEventToMarks() {
     for (let i = 0; i < arr.length; i++) {
         let son = arr[i].lastChild;
         son.addEventListener("click", function (event) {
-            let prom = prompt("Enter mark");
+            let prom = parseInt(prompt("Enter mark"));
             if (Number(prom) < 0) {
                 prom = "0";
             }
