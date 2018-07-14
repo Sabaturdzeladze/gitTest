@@ -305,6 +305,7 @@ addDayEvent.addEventListener('click', function () {
     }
     else {
         let previousDay = previousDayDiv.children[previousDayDiv.children.length - 1];
+        console.log(previousDay);
         let arr = previousDay.textContent.split(' ')
         arr = arr[1] + ' ' + arr[2];
         previousDay = new Date(`2018 ${arr}`);
@@ -444,7 +445,7 @@ function addEventToMarks() {
     for (let i = 0; i < arr.length; i++) {
         let son = arr[i].lastChild;
         son.addEventListener("click", function (event) {
-            let prom = parseInt(prompt("Enter mark"));
+            let prom = prompt("Enter mark");
             if (Number(prom) < 0) {
                 prom = "0";
             }
