@@ -305,7 +305,6 @@ addDayEvent.addEventListener('click', function () {
     }
     else {
         let previousDay = previousDayDiv.children[previousDayDiv.children.length - 1];
-        console.log(previousDay);
         let arr = previousDay.textContent.split(' ')
         arr = arr[1] + ' ' + arr[2];
         previousDay = new Date(`2018 ${arr}`);
