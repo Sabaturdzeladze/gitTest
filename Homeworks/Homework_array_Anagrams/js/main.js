@@ -30,4 +30,5 @@ function aClean(arr) {
     return newArr;
 }
 
+
 console.log(aClean(arr));
