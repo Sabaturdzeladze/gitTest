@@ -33,7 +33,6 @@ button.addEventListener( "click", function(){
 })
 
 
-
 function append(element) {
     let createElem = document.createElement(`div`);
     createElem.textContent = element.value;
