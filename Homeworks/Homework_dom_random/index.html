@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Random numbers coloring</title>
+    <style>
+        .wrapper {
+            display: grid;
+            grid-template-columns: repeat(10, 100px);
+            grid-auto-rows: minmax(50px, auto);
+            grid-gap: 5px;
+            width: 1000px;
+            margin: 20px auto;
+        }
+        .wrapper div {
+            box-sizing: border-box;
+            text-align: center;
+            line-height: 50px;
+            border: 1px solid grey;
+            
+        }
+        button {
+            margin: 20px auto;
+            grid-column: 5/7;
+        }
+        #id1 {
+            background-color: red;
+        }
+        #id2 {
+            background-color: blue;
+        }
+        #id3 {
+            background-color: green;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrapper">
+        <div>1</div>
+        <div>2</div>
+        <div>3</div>
+        <div>4</div>
+        <div>5</div>
+        <div>6</div>
+        <div>7</div>
+        <div>8</div>
+        <div>9</div>
+        <div>10</div>
+        <div>11</div>
+        <div>12</div>
+        <div>13</div>
+        <div>14</div>
+        <div>15</div>
+        <div>16</div>
+        <div>17</div>
+        <div>18</div>
+        <div>19</div>
+        <div>20</div>
+        <button id="random">Random</button>
+    </div>
+
+    <script src="js/main.js"></script>
+</body>
+
+</html>
