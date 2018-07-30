@@ -32,7 +32,6 @@ fetch(usersEndPoint, {
     } )
 } )
 })
-
 .catch( err => console.log(`Error - ${err.message}`) )
 
 

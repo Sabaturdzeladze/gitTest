@@ -24,6 +24,7 @@ async function getJSON2() {
     }
 }
 
+
 getJSON();
 
 /* Async function syntaxes */

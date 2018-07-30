@@ -13,6 +13,7 @@ function makePromise(time) {
     }  );
 }
 
+
 // let sec1 = makePromise(1000)
 // sec1.then( result => {
 //     console.log(result);
