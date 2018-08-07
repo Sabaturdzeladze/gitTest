@@ -3,29 +3,26 @@ if (localStorage.getItem('users') !== null){
     json.forEach(element => {
         generate(element);
     })
-    let remove = document.querySelectorAll('span')
-    remove.forEach(element => {
-        element.addEventListener('click', removeEvent)
-    })
+    
+    addEvents();
 
 }else {
 fetch('https://jsonplaceholder.typicode.com/users')
 .then( response => response.json() )
 .then( json => {
-    // console.log(json);
     localStorage.setItem('users', JSON.stringify(json));
     json.forEach(element => {
         generate(element);
     });
-    let remove = document.querySelectorAll('span')
-    remove.forEach(element => {
-        element.addEventListener('click', removeEvent)
-    })
+
+    addEvents();
+
 } )
 .catch( err => console.log(err) );
 
 }
 
+// generate html
 function generate(element){
     let wrapper = document.createElement('div');
     
@@ -46,19 +43,41 @@ function generate(element){
     wrapper.appendChild(edit);
 }
 
+// remove 
 function removeEvent(e) {
     let arr = JSON.parse(localStorage.getItem('users'))
-    let index = arr.map(function(e) { return e.name; }).indexOf(e.target.parentElement.firstChild.textContent);
-
+    let firstChildElem = e.target.parentElement.firstChild
+    let index = arr.map(function(e) { return e.name; }).indexOf(firstChildElem.textContent);
+    
     arr.splice(index, 1);
     localStorage.setItem('users', JSON.stringify(arr));
-
+    
     e.target.parentElement.remove();
 }
 
+// edit
 function editEvent(e){
     let arr = JSON.parse(localStorage.getItem('users'))
-    let index = arr.map(function(e) { return e.name; }).indexOf(e.target.parentElement.firstChild.nextSibling.textContent);
+    let firstChildElem = e.target.parentElement.firstChild
+    let index = arr.map(function(e) { return e.name; }).indexOf(firstChildElem.textContent);
+    let newName = prompt("Enter Name");
+    let newEmail = prompt("Enter email");
+    arr[index].name = newName;
+    arr[index].email = newEmail;
+    localStorage.setItem('users', JSON.stringify(arr));
 
-    
+    firstChildElem.textContent = newName;
+    firstChildElem.nextSibling.textContent = newEmail;   
+}
+
+
+function addEvents(){
+    let remove = document.querySelectorAll('span')
+    remove.forEach(element => {
+        element.addEventListener('click', removeEvent)
+    })
+    let edit = document.querySelectorAll('i')
+    edit.forEach(element => {
+        element.addEventListener('click', editEvent)
+    });
 }
