@@ -1,16 +1,5 @@
+
 let todos = getSavedTodos();
-
-// let count = 0;
-// todos.forEach(element => {
-//     if (!element.completed){
-//         let p = document.createElement("p");
-//         document.body.appendChild(p)
-//         p.textContent = element.text;
-//         count++;
-//     }
-// });
-// document.write(`You have ${count} todos left`);
-
 
 render(todos)
 
@@ -28,6 +17,7 @@ document.querySelector("#search").addEventListener("input", (e) => {
 document.querySelector("#todo-form").addEventListener("submit", (e) => {
     e.preventDefault();
     let newObj = {
+        id: uuidv4(),
         text: e.target.elements.newTodo.value,
         completed: false
     }

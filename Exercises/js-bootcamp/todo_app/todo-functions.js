@@ -10,6 +10,17 @@ function getSavedTodos() {
     }
 }
 
+// Remove todos
+function removeTodos(id){
+    index = todos.findIndex((todo) => {
+        return todo.id === id;
+    })
+
+    if (index > -1){
+        todos.splice(index, 1);
+    }
+}
+
 // Save todos to localStorage 
 function saveTodos(todos) {
     localStorage.setItem("todos", JSON.stringify(todos));
@@ -31,10 +42,24 @@ function generateTodoDOM(todos, container) {
     todos.forEach( element => {
         let div = document.createElement("div");
         let button = document.createElement("button");
-        button.textContent = "x";
         let checkbox = document.createElement("input");
-        checkbox.setAttribute("type", "checkbox");
         let span = document.createElement("span");
+           
+        checkbox.checked = element.completed;
+
+        checkbox.addEventListener('change', function(e){
+            element.completed = e.target.checked;
+            saveTodos(todos);
+            render(todos);
+        })
+     
+        button.addEventListener('click', function(){
+            removeTodos(element.id);
+            saveTodos(todos);
+            render(todos);
+        })
+        checkbox.setAttribute("type", "checkbox");
+        button.textContent = "x";
         span.textContent = element.text;
         container.appendChild(div);
         div.appendChild(checkbox);
