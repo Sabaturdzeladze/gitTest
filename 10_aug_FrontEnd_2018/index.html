@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>JS 101</title>
+</head>
+<body>
+    <button id="doLazy">do</button>
+    <button id="colorize">color</button>
+
+    <script src="js/worker.js"></script>
+    <!-- <script src="js/singleton.js"></script> -->
+
+    <script>
+        let worker = new Worker('js/worker.js');
+
+        function add(a,b){
+            if (!parseFloat(a) || !parseFloat(b)){
+                throw 'numeric inputs allowed';
+            }
+            return a + b;
+        }
+
+        function sub(a, b){
+            return a - b;
+        }
+
+        
+
+        // let sum = new Function('a', 'b', 'return a + b')
+        // worker.addEventListener('message', function(e){
+        //     console.log(e.data);
+        // })
+
+
+        // worker.postMessage({
+        //     type: 'add',
+        //     nums: [3, 5]
+        // })
+        // worker.postMessage({
+        //     type: 'sub',
+        //     nums: [9,5]
+        // })
+
+        doLazy.addEventListener('click', function(e){
+
+            // for (let i = 0; i < 100000000000; i++){
+
+            // }
+            // document.write('doLazy')
+
+            document.write(sum(10, 13))
+        })
+
+        // colorize.addEventListener('click', () => {
+        //     worker.postMessage({
+        //         type: 'doLazy',
+        //         nums: [3, 6]
+        //     })
+        //     document.body.style.backgroundColor = 'seagreen';
+        // })
+    </script>
+</body>
+</html>
