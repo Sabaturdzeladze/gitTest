@@ -1,22 +1,50 @@
-function add(a, b){
-    this.postMessage(a + b);
-}
+let functions = {};
 
-function sub(a, b){
-    this.postMessage(a - b);
-}
+self.addEventListener("message", function(e) {
+  let result = null;
 
-self.addEventListener('message', function(e) {
-    switch(e.data.type){
-        case 'add':
-            add.apply(this, e.data.nums);
+  try {
+    switch (e.data.type) {
+      case "registerFunction":
+        // add.apply(this, e.data.nums);
+
+        functions[e.data.name] = new Function(e.data.parameters, e.data.body);
+
         break;
-        case 'sub':
-            sub.apply(this, e.data.nums)
+
+      // case 'sub':
+
+      //     sub.apply(this, e.data.nums);
+
+      // break;
+
+      case "doLazy":
+        for (let i = 0; i < 10000000000; i++) {}
+
+        self.postMessage("doLazy");
+
         break;
-        case 'doLazy':
-            for (let i = 0; i < 1000000; i++){}
-            self.postMessage('doLazy');
-        break;
+
+      default:
+        if (functions[e.data.type]) {
+          result = {
+            isError: false,
+
+            value: functions[e.data.type].apply(null, e.data.nums)
+          };
+        }
     }
-})
+  } catch (error) {
+    result = {
+      isError: true,
+
+      value: error
+    };
+  }
+
+  this.postMessage({
+    processId: e.data.processId,
+
+    result: result
+  });
+});

@@ -1,66 +1,147 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>JS 101</title>
-</head>
-<body>
-    <button id="doLazy">do</button>
-    <button id="colorize">color</button>
 
-    <script src="js/worker.js"></script>
-    <!-- <script src="js/singleton.js"></script> -->
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <title>Worker</title>
+
+</head>
+
+<body>
+
+    <button id="doLazy">Do</button>
+
+    <button id="colorize">Colorize</button>
 
     <script>
+
         let worker = new Worker('js/worker.js');
 
-        function add(a,b){
-            if (!parseFloat(a) || !parseFloat(b)){
+        let nextProcessId = 1;
+
+        callbacks = {};
+
+
+
+        function add(a, b) {
+
+            if (!parseFloat(a) || !parseFloat(b)) {
+
                 throw 'numeric inputs allowed';
+
             }
+
             return a + b;
+
         }
 
-        function sub(a, b){
+
+
+        function sub(a, b) {
+
             return a - b;
+
         }
 
-        
+        worker.addEventListener('message', function (e) {
+            // console.log(e.data);
+            if (callbacks[e.data.processId]) {
+                callbacks[e.data.processId](e.data.result)
+                delete callbacks[e.data.processId];
+            }
+        })
+        // /[a-z]+/i
+        // (...){....}
 
-        // let sum = new Function('a', 'b', 'return a + b')
-        // worker.addEventListener('message', function(e){
-        //     console.log(e.data);
-        // })
+        let regExp = /\((.*)\).*\{([\s\S]*)\}/m;
+        let addParts = regExp.exec(add.toString());
+        // console.log(addParts);
+        worker.postMessage({
+            type: 'registerFunction',
+            name: 'add',
+            parameters: addParts[1],
+            body: addParts[2],
+        });
+
+        let msg = {
+            type: 'add',
+            nums: [1, 2],
+            processId: nextProcessId++,
+        }
+
+        callbacks[msg.processId] = (function (msg) {
+            return function (result) {
+                if (result.isError) {
+                    console.log("something went wrong");
+
+                }
+
+                else {
+
+                    console.log('The result of adding', msg.nums, 'is', result.value);
+
+                }
+
+            }
+
+        })(msg)
+
+        worker.postMessage(msg)
 
 
         // worker.postMessage({
+
         //     type: 'add',
-        //     nums: [3, 5]
-        // })
+
+        //     nums: [3,5]
+
+        // });
+
+
+
         // worker.postMessage({
+
         //     type: 'sub',
-        //     nums: [9,5]
-        // })
 
-        doLazy.addEventListener('click', function(e){
+        //     nums: [8,2]
 
-            // for (let i = 0; i < 100000000000; i++){
+        // });
 
-            // }
-            // document.write('doLazy')
+        let sum = new Function('a', 'b', 'return a + b');
 
-            document.write(sum(10, 13))
+
+
+        doLazy.addEventListener('click', function (e) {
+
+            // worker.postMessage({
+
+            // type: 'doLazy',
+
+            //     nums: [3,5]
+
+            // });
+
+            document.write(sum(10, 13));
+
+        });
+
+
+
+        colorize.addEventListener('click', () => {
+
+            document.body.style.backgroundColor = 'seagreen';
+
         })
 
-        // colorize.addEventListener('click', () => {
-        //     worker.postMessage({
-        //         type: 'doLazy',
-        //         nums: [3, 6]
-        //     })
-        //     document.body.style.backgroundColor = 'seagreen';
-        // })
     </script>
+
 </body>
+
 </html>
