@@ -1,43 +1,37 @@
-const lastEdited = document.createElement('span')
-const noteId = location.hash.substring(1);
-let notes = getSavedNotes();
-const title = document.querySelector('#note-title');
-const body = document.querySelector('#note-body');
+const titleElement = document.querySelector('#note-title')
+const bodyElement = document.querySelector('#note-body')
+const removeElement = document.querySelector('#remove-note')
+const dateElement = document.querySelector('#last-edited')
+const noteId = location.hash.substring(1)
+let notes = getSavedNotes()
 let note = notes.find(function (note) {
-    return note.id === noteId;
+    return note.id === noteId
 })
 
 if (note === undefined) {
     location.assign('../note_app/index.html')
 }
-debugger
 
-title.value = note.title;
-body.value = note.body;
-lastEdited.textContent = generateLastEdited(note.updatedAt)
+titleElement.value = note.title
+bodyElement.value = note.body
+dateElement.textContent = generateLastEdited(note.updatedAt)
 
-let parent = document.querySelector('body')
-parent.insertBefore(lastEdited, parent.childNodes[5])
-
-title.addEventListener('input', (e) => {
-    note.title = e.target.value;
-    note.updatedAt = moment().valueOf();
-    lastEdited.textContent = generateLastEdited(note.updatedAt)
-
+titleElement.addEventListener('input', function (e) {
+    note.title = e.target.value
+    note.updatedAt = moment().valueOf()
+    dateElement.textContent = generateLastEdited(note.updatedAt)
     saveNotes(notes)
 })
 
-body.addEventListener('input', (e) => {
-    note.body = e.target.value;
-    note.updatedAt = updatedAt().valueOf();
-    lastEdited.textContent = generateLastEdited(note.updatedAt)
-
+bodyElement.addEventListener('input', function (e) {
+    note.body = e.target.value
+    note.updatedAt = moment().valueOf()
+    dateElement.textContent = generateLastEdited(note.updatedAt)
     saveNotes(notes)
 })
 
-const remove = document.querySelector('#remove-note')
-remove.addEventListener('click', (e) => {
-    removeNote(noteId)
+removeElement.addEventListener('click', function (e) {
+    removeNote(note.id)
     saveNotes(notes)
     location.assign('../note_app/index.html')
 })
@@ -46,15 +40,15 @@ window.addEventListener('storage', function (e) {
     if (e.key === 'notes') {
         notes = JSON.parse(e.newValue)
         note = notes.find(function (note) {
-            return note.id === noteId;
+            return note.id === noteId
         })
 
         if (note === undefined) {
             location.assign('../note_app/index.html')
         }
 
-        title.value = note.title;
-        body.value = note.body;
-        lastEdited.textContent = generateLastEdited(note.updatedAt)
+        titleElement.value = note.title
+        bodyElement.value = note.body
+        dateElement.textContent = generateLastEdited(note.updatedAt)
     }
 })
