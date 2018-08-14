@@ -1,3 +1,4 @@
+const lastEdited = document.createElement('span')
 const noteId = location.hash.substring(1);
 let notes = getSavedNotes();
 const title = document.querySelector('#note-title');
@@ -9,17 +10,28 @@ let note = notes.find(function (note) {
 if (note === undefined) {
     location.assign('../note_app/index.html')
 }
+debugger
 
 title.value = note.title;
 body.value = note.body;
+lastEdited.textContent = generateLastEdited(note.updatedAt)
+
+let parent = document.querySelector('body')
+parent.insertBefore(lastEdited, parent.childNodes[5])
 
 title.addEventListener('input', (e) => {
     note.title = e.target.value;
+    note.updatedAt = moment().valueOf();
+    lastEdited.textContent = generateLastEdited(note.updatedAt)
+
     saveNotes(notes)
 })
 
 body.addEventListener('input', (e) => {
     note.body = e.target.value;
+    note.updatedAt = updatedAt().valueOf();
+    lastEdited.textContent = generateLastEdited(note.updatedAt)
+
     saveNotes(notes)
 })
 
@@ -43,5 +55,6 @@ window.addEventListener('storage', function (e) {
 
         title.value = note.title;
         body.value = note.body;
+        lastEdited.textContent = generateLastEdited(note.updatedAt)
     }
 })
