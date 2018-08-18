@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>JS DragNDrop</title>
+    <style>
+        [data-role='drag-drop-target']{
+            float: left;
+            width: 500px;
+            height: 300px;
+            margin: 10px;
+            padding: 10px;
+            border: 3px solid #ddd;
+            border-radius: 5px;
+        }
+        img {
+            width: 100%;
+        }
+
+        .over{
+            background-color: #ffc;
+        }
+
+        [draggable='true']{
+            -moz-user-select: none;
+            -webkit-user-select: none;
+            user-select: none;
+        }
+
+        .drag {
+            opacity: 0.25;
+        }
+    </style>
+</head>
+<body>
+    <div id="source__container" data-role='drag-drop-target'>
+        <img width="500" src="https://peach.blender.org/wp-content/uploads/bbb-splash.png?x11217" alt="" draggable="true" id="snapshot">
+    </div>
+    <div id="source__container_2" data-role='drag-drop-target'>
+        <img width="500" src="https://peach.blender.org/wp-content/uploads/bbb-splash.png?x11217" alt="" draggable="true" id="snapshot_2">
+    </div>
+
+    <div id="target__container" data-role='drag-drop-target'></div>
+
+    <script src="js/DragNDrop2.js"></script>
+</body>
+</html>
