@@ -38,23 +38,10 @@ function compareAscending(){
     createNumbers(arr);
 }
 
-// $('#shuffle').on('click')
 $('#byAscending').on('click', compareAscending);
 $('#byDescending').on('click', compareDescending);
 
 function shuffle() {
-    // var currentIndex = arr.length, temporaryValue, randomIndex;
-  
-    // while (0 !== currentIndex) {
-  
-    //   randomIndex = Math.floor(Math.random() * currentIndex);
-    //   currentIndex -= 1;
-  
-    //   temporaryValue = arr[currentIndex];
-    //   arr[currentIndex] = arr[randomIndex];
-    //   arr[randomIndex] = temporaryValue;
-    // }
-
     for(let i = 0; i < arr.length; i++){
         let current = Math.floor(Math.random() * i + 1);
         [arr[i], arr[current]] = [arr[current], arr[i]];
