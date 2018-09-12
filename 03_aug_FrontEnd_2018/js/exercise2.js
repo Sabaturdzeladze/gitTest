@@ -14,7 +14,7 @@ function createNumbers(arr){
     let divs = document.querySelectorAll('#wrapper div')
     divs.forEach(item => {
     item.addEventListener('click', (e) => {
-        let index = parseInt(e.target.textContent) - 1;
+        index = arr.indexOf(parseInt(e.target.textContent));
         e.target.remove();
         arr.splice(index, 1);
         createNumbers(arr);
