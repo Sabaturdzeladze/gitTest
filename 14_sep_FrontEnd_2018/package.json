@@ -1,0 +1,16 @@
+{
+  "name": "14_sep_frontend_2018",
+  "version": "1.0.0",
+  "description": "\"My First Project\"",
+  "main": "main.js",
+  "dependencies": {
+    "upper-case": "^1.1.3"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node main.js"
+  },
+  "author": "\"Saba Turdzeladze\"",
+  "license": "MIT"
+}

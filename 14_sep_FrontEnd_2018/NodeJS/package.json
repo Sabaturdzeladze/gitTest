@@ -1,0 +1,12 @@
+{
+  "name": "dates",
+  "version": "1.0.0",
+  "description": "getDates",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js"
+  },
+  "author": "\"Saba Turdzeladze\"",
+  "license": "MIT"
+}
