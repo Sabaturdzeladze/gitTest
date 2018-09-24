@@ -1,7 +1,16 @@
 class Snake {
-    constructor(coords, next = null) {
+    constructor(coords, next = null, x, y, speed, radius) {
         this.coords = coords;
         this.next = next;
+        this.x = x;
+        this.y = y;
+        this.speed = speed;
+        this.radius = radius;
+    }
+
+    draw() {
+        ctx.beginPath();
+        // ctx.
     }
 }
 
