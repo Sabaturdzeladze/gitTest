@@ -2,6 +2,7 @@
 // let SnakeList = game.SnakeList;
 // let Snake = game.Snake;
 
+
 // #region Classes
 class Apple {
     constructor(width, height) {
@@ -157,29 +158,76 @@ class SnakeList {
 }
 // #endregion
 
-// #endregion
+// #endregion classes
+
 const canvas = document.querySelector('canvas');
 const ctx = canvas.getContext('2d');
 
 let snake = new SnakeList();
 let apQuantity = 5;
-
+let snakeLength = 3;
+let speed = 0;
 let appleArray = [];
-
-for (let i = 0; i < apQuantity; i++) {
-    let apple = new Apple(10, 10)
-    appleArray.push(apple);
-}
-
-// create snake, 5 rectangles;
-let x = 100;
-let y = 100;
-for (let i = 0; i < 2; i++) {
-    snake.insertLast([x, y], 2, 10, 10);
-    y += 10;
-}
-snake.createSnake();
 let state = 'down';
+
+function getUserInputs() {
+    let gameLevel = document.querySelector('select').options.selectedIndex
+    speed = 0;
+    switch (gameLevel) {
+        case 0:
+            speed = 5;
+            break;
+        case 1:
+            speed = 3.5;
+            break;
+        case 2:
+            speed = 2;
+            break;
+    }
+    let width = document.querySelector('#width').value;
+    let height = document.querySelector('#height').value;
+    let quantity = document.querySelector('#quantity').value;
+    let speedForLevel = document.querySelector('#speed').value;
+    speed /= speedForLevel;
+
+    return {
+        speed,
+        width,
+        height,
+        quantity
+    }
+}
+
+function createLayout() {
+    const userInputs = getUserInputs();
+
+    canvas.width = userInputs.width;
+    canvas.height = userInputs.height;
+
+    apQuantity = userInputs.quantity;
+    snakeLength = userInputs.quantity;
+
+    for (let i = 0; i < apQuantity; i++) {
+        let apple = new Apple(10, 10)
+        appleArray.push(apple);
+    }
+    
+    // create snake, 5 rectangles;
+    let x = 100;
+    let y = 100;
+    for (let i = 0; i < snakeLength; i++) {
+        snake.insertLast([x, y], 2, 10, 10);
+        y += 10;
+    }
+
+    let display = document.querySelector('#inputs')
+    display.style.display = 'none';
+    canvas.style.display = 'block';
+
+    snake.createSnake();
+
+    animate();
+}
 
 
 // game
@@ -222,7 +270,7 @@ function animate() {
 
 
     // speed of the game (fps = fps / speed)
-    if (++count < 5) {
+    if (++count < speed) {
         return;
     }
     count = 0;
@@ -230,21 +278,22 @@ function animate() {
 
     // problem
     let condition = last.coords[1] + last.height >= canvas.height ||
-    last.coords[1] - last.height < 0 || 
-    last.coords[0] + last.width >= canvas.width ||
-    last.coords[0] - last.width < 0;
-    
-    
+        last.coords[1] - last.height < 0 ||
+        last.coords[0] + last.width >= canvas.width ||
+        last.coords[0] - last.width < 0;
+
+
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     if (state === 'down') snake.moveDown();
     else if (state === 'right') snake.moveRight();
     else if (state === 'left') snake.moveLeft();
     else if (state === 'up') snake.moveUp();
-    
-    
+
+
     for (let item of appleArray) {
         item.draw();
     }
+    console.log(condition);
     if (condition) {
         console.log(last.coords[1] + last.height, last.coords[1] - last.height, last.coords[0] + last.width, last.coords[0] - last.width);
         cancelAnimationFrame(gameLoop)
@@ -267,7 +316,8 @@ document.addEventListener('keydown', (event) => {
         state = 'up';
     }
 })
-animate();
+
+document.querySelector('#start').addEventListener('click', createLayout)
 
 
 function getRandomArr(snake, appleArray) {
