@@ -174,7 +174,7 @@ for (let i = 0; i < apQuantity; i++) {
 // create snake, 5 rectangles;
 let x = 100;
 let y = 100;
-for (let i = 0; i < 2; i++) {
+for (let i = 0; i < 4; i++) {
     snake.insertLast([x, y], 2, 10, 10);
     y += 10;
 }
@@ -229,10 +229,10 @@ function animate() {
 
 
     // problem
-    let condition = last.coords[1] + last.height >= canvas.height ||
-    last.coords[1] - last.height < 0 || 
-    last.coords[0] + last.width >= canvas.width ||
-    last.coords[0] - last.width < 0;
+    let condition = last.coords[1] + last.height > canvas.height + 1||
+    last.coords[1] /* - last.height */ < 0 || 
+    last.coords[0] + last.width > canvas.width + 1||
+    last.coords[0] /* - last.width */ < 0;
     
     
     ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -246,7 +246,7 @@ function animate() {
         item.draw();
     }
     if (condition) {
-        console.log(last.coords[1] + last.height, last.coords[1] - last.height, last.coords[0] + last.width, last.coords[0] - last.width);
+        console.log(last.coords[1] + last.height, canvas.height);
         cancelAnimationFrame(gameLoop)
     }
 }

@@ -188,13 +188,15 @@ function getUserInputs() {
     let height = document.querySelector('#height').value;
     let quantity = document.querySelector('#quantity').value;
     let speedForLevel = document.querySelector('#speed').value;
+    let snakeLength = document.querySelector('#length').value;
     speed /= speedForLevel;
 
     return {
         speed,
         width,
         height,
-        quantity
+        quantity,
+        snakeLength
     }
 }
 
@@ -205,13 +207,13 @@ function createLayout() {
     canvas.height = userInputs.height;
 
     apQuantity = userInputs.quantity;
-    snakeLength = userInputs.quantity;
+    snakeLength = userInputs.snakeLength;
 
     for (let i = 0; i < apQuantity; i++) {
         let apple = new Apple(10, 10)
         appleArray.push(apple);
     }
-    
+
     // create snake, 5 rectangles;
     let x = 100;
     let y = 100;
@@ -277,10 +279,10 @@ function animate() {
 
 
     // problem
-    let condition = last.coords[1] + last.height >= canvas.height ||
-        last.coords[1] - last.height < 0 ||
-        last.coords[0] + last.width >= canvas.width ||
-        last.coords[0] - last.width < 0;
+    let condition = last.coords[1] + last.height > canvas.height + 1 ||
+        last.coords[1] /* - last.height */ < 0 ||
+        last.coords[0] + last.width > canvas.width + 1 ||
+        last.coords[0] /* - last.width */ < 0;
 
 
     ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -293,9 +295,8 @@ function animate() {
     for (let item of appleArray) {
         item.draw();
     }
-    console.log(condition);
+
     if (condition) {
-        console.log(last.coords[1] + last.height, last.coords[1] - last.height, last.coords[0] + last.width, last.coords[0] - last.width);
         cancelAnimationFrame(gameLoop)
     }
 }
