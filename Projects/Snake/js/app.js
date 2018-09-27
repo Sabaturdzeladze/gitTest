@@ -220,11 +220,11 @@ function createLayout() {
     else {
         userInputs = getUserInputs();
 
-        canvas.width = isNaN(userInputs.width) ? 600 : userInputs.width;
-        canvas.height = isNaN(userInputs.height) ? 400 : userInputs.height;
+        canvas.width = isNaN(userInputs.width) || userInputs.width < 300 ? 600 : userInputs.width;
+        canvas.height = isNaN(userInputs.height) || userInputs.height < 200 ? 400 : userInputs.height;
     
-        apQuantity = isNaN(userInputs.quantity) ? 1 : userInputs.quantity;
-        snakeLength = isNaN(userInputs.snakeLength) ? 5 : userInputs.snakeLength;
+        apQuantity = isNaN(userInputs.quantity) || userInputs.quantity < 1 ? 1 : userInputs.quantity;
+        snakeLength = isNaN(userInputs.snakeLength) || userInputs.snakeLength < 4 ? 4 : userInputs.snakeLength;
     }
 
     for (let i = 0; i < apQuantity; i++) {
