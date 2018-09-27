@@ -154,8 +154,8 @@ const ctx = canvas.getContext('2d');
 
 let snake = new SnakeList();
 let apQuantity = 5;
-let snakeLength = 3;
-let speed = 0;
+let snakeLength = 4;
+let speed = 5;
 let appleArray = [];
 let state = 'down';
 let score = 0;
@@ -176,12 +176,14 @@ function getUserInputs() {
             speed = 2;
             break;
     }
-    let width = document.querySelector('#width').value;
-    let height = document.querySelector('#height').value;
-    let quantity = document.querySelector('#quantity').value;
-    let speedForLevel = document.querySelector('#speed').value;
-    let snakeLength = document.querySelector('#length').value;
-    speed /= speedForLevel;
+    let width = parseInt(document.querySelector('#width').value);
+    let height = parseInt(document.querySelector('#height').value);
+    let quantity = parseInt(document.querySelector('#quantity').value);
+    let speedForLevel = parseInt(document.querySelector('#speed').value);
+    let snakeLength = parseInt(document.querySelector('#length').value);
+    if (!isNaN(speedForLevel)){
+        speed /= speedForLevel;
+    }
 
 
     localStorage.setItem('inputs', JSON.stringify({
@@ -218,11 +220,11 @@ function createLayout() {
     else {
         userInputs = getUserInputs();
 
-        canvas.width = userInputs.width;
-        canvas.height = userInputs.height;
+        canvas.width = isNaN(userInputs.width) ? 600 : userInputs.width;
+        canvas.height = isNaN(userInputs.height) ? 400 : userInputs.height;
     
-        apQuantity = userInputs.quantity;
-        snakeLength = userInputs.snakeLength;
+        apQuantity = isNaN(userInputs.quantity) ? 1 : userInputs.quantity;
+        snakeLength = isNaN(userInputs.snakeLength) ? 5 : userInputs.snakeLength;
     }
 
     for (let i = 0; i < apQuantity; i++) {
@@ -347,8 +349,14 @@ document.addEventListener('keydown', (event) => {
 document.querySelector('#start').addEventListener('click', createLayout)
 
 document.querySelector('#previous').addEventListener('click', (event) => {
-    previous = true;
-    createLayout();
+    let storage = JSON.parse(localStorage.getItem('inputs'))
+    if (!(storage.width) || !(storage.height) || !(storage.quantity) || !(storage.snakeLength)) {
+        alert('No previous data!');
+    }
+    else {
+        previous = true;
+        createLayout();
+    }
 })
 
 
@@ -421,7 +429,6 @@ function startOver() {
         state = 'down';
         score = 0;
         count = 0;
-        previous = false;
 
         canvas.style.display = 'none';
         button.remove();
