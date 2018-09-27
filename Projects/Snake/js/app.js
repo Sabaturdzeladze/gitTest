@@ -159,6 +159,8 @@ let speed = 0;
 let appleArray = [];
 let state = 'down';
 let score = 0;
+let count = 0;
+let previous = false;
 
 function getUserInputs() {
     let gameLevel = document.querySelector('select').options.selectedIndex
@@ -189,7 +191,7 @@ function getUserInputs() {
         quantity,
         snakeLength
     }))
-
+    
     return {
         speed,
         width,
@@ -249,7 +251,6 @@ function createLayout() {
 
 // game
 
-let count = 0;
 function animate() {
     let gameLoop = requestAnimationFrame(animate);
     let last = snake.getLast();
@@ -345,8 +346,6 @@ document.addEventListener('keydown', (event) => {
 
 document.querySelector('#start').addEventListener('click', createLayout)
 
-
-let previous = false;
 document.querySelector('#previous').addEventListener('click', (event) => {
     previous = true;
     createLayout();
@@ -394,15 +393,39 @@ function getRandomArr(snake, appleArray) {
 }
 
 function lose() {
-    debugger
     ctx.clearRect(0, 0, canvas.width, canvas.height)
     let highest = JSON.parse(localStorage.getItem('highScore'))
     ctx.font = "40px Arial";
-    console.log(score < highest);
     if (score < highest) {
         ctx.fillText(`Your score is ${score}`, canvas.width / 2 - 140, canvas.height / 2 )
     }
     else {
         ctx.fillText(`New High Score ${score}`, canvas.width / 2 - 160, canvas.height / 2 )
     }
+
+    startOver()
+}
+
+function startOver() {
+    let button = document.createElement('button');
+    button.setAttribute('id', 'startOver');
+    button.textContent = 'Start Over';
+    document.body.appendChild(button);
+    
+    button.addEventListener('click', (event) => {
+        snake = new SnakeList();
+        apQuantity = 5;
+        snakeLength = 3;
+        speed = 0;
+        appleArray = [];
+        state = 'down';
+        score = 0;
+        count = 0;
+        previous = false;
+
+        canvas.style.display = 'none';
+        button.remove();
+        let display = document.querySelector('#inputs')
+        display.style.display = 'block';
+    })
 }
