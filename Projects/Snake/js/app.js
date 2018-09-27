@@ -349,8 +349,9 @@ document.addEventListener('keydown', (event) => {
 document.querySelector('#start').addEventListener('click', createLayout)
 
 document.querySelector('#previous').addEventListener('click', (event) => {
-    let storage = JSON.parse(localStorage.getItem('inputs'))
-    if (!(storage.width) || !(storage.height) || !(storage.quantity) || !(storage.snakeLength)) {
+    let storage = JSON.parse(localStorage.getItem('inputs'));
+
+    if (!storage || !(storage.width) || !(storage.height) || !(storage.quantity) || !(storage.snakeLength)) {
         alert('No previous data!');
     }
     else {
@@ -404,6 +405,7 @@ function lose() {
     ctx.clearRect(0, 0, canvas.width, canvas.height)
     let highest = JSON.parse(localStorage.getItem('highScore'))
     ctx.font = "40px Arial";
+    ctx.fillStyle = 'blue'
     if (score < highest) {
         ctx.fillText(`Your score is ${score}`, canvas.width / 2 - 140, canvas.height / 2 )
     }
