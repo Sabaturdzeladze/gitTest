@@ -55,28 +55,13 @@ class SnakeList {
             return null;
         }
 
-        let node = this.head;
-        while (node) {
-            if (!node.next) {
-                return node;
+        let current = this.head;
+        while (current) {
+            if (!current.next) {
+                return current;
             }
-            node = node.next;
+            current = current.next;
         }
-    }
-
-    clear() {
-        this.head = null;
-    }
-
-    size() {
-        let counter = 0;
-        let part = this.head;
-
-        while (part) {
-            part = part.next;
-            counter++;
-        }
-        return counter;
     }
 
     removeFirst() {
@@ -91,9 +76,13 @@ class SnakeList {
 
     draw(part) {
         ctx.beginPath();
-        ctx.fillStyle = 'black'
+        ctx.fillStyle = 'green'
         ctx.fillRect(part.coords[0], part.coords[1], part.width, part.height);
         ctx.closePath();
+
+        ctx.fillStyle = 'blue';
+        ctx.font = '30px Garamond';
+        ctx.fillText(`Your score is ${score}`, canvas.width / 2, 30)
     }
 
     foreach(fn) {
@@ -169,6 +158,7 @@ let snakeLength = 3;
 let speed = 0;
 let appleArray = [];
 let state = 'down';
+let score = 0;
 
 function getUserInputs() {
     let gameLevel = document.querySelector('select').options.selectedIndex
@@ -191,6 +181,15 @@ function getUserInputs() {
     let snakeLength = document.querySelector('#length').value;
     speed /= speedForLevel;
 
+
+    localStorage.setItem('inputs', JSON.stringify({
+        speed,
+        width,
+        height,
+        quantity,
+        snakeLength
+    }))
+
     return {
         speed,
         width,
@@ -201,25 +200,41 @@ function getUserInputs() {
 }
 
 function createLayout() {
-    const userInputs = getUserInputs();
+    let userInputs;
 
-    canvas.width = userInputs.width;
-    canvas.height = userInputs.height;
+    if (previous) {
+        userInputs = JSON.parse(localStorage.getItem('inputs'));
 
-    apQuantity = userInputs.quantity;
-    snakeLength = userInputs.snakeLength;
+        canvas.width = userInputs.width;
+        canvas.height = userInputs.height;
+    
+        apQuantity = userInputs.quantity;
+        snakeLength = userInputs.snakeLength;
+        speed = userInputs.speed
+        previous = false;
+    } 
+    else {
+        userInputs = getUserInputs();
+
+        canvas.width = userInputs.width;
+        canvas.height = userInputs.height;
+    
+        apQuantity = userInputs.quantity;
+        snakeLength = userInputs.snakeLength;
+    }
 
     for (let i = 0; i < apQuantity; i++) {
         let apple = new Apple(10, 10)
         appleArray.push(apple);
     }
 
-    // create snake, 5 rectangles;
     let x = 100;
     let y = 100;
+    let width = 10;
+    let height = 10;
     for (let i = 0; i < snakeLength; i++) {
-        snake.insertLast([x, y], 2, 10, 10);
-        y += 10;
+        snake.insertLast([x, y], 2, width, height);
+        y += height;
     }
 
     let display = document.querySelector('#inputs')
@@ -239,14 +254,18 @@ function animate() {
     let gameLoop = requestAnimationFrame(animate);
     let last = snake.getLast();
 
+    // collision with itself
     snake.foreach((part) => {
         if (part !== last) {
             if (part.coords[0] + part.width === last.coords[0] + last.width
                 && part.coords[1] + part.width === last.coords[1] + last.width) {
                 cancelAnimationFrame(gameLoop);
+                lose()
             }
         }
     })
+
+    // Eating and growing
     appleArray.forEach((apple, index) => {
         if (apple.coords[0] + apple.width === last.coords[0] + last.width
             && apple.coords[1] + apple.width === last.coords[1] + last.width) {
@@ -267,6 +286,13 @@ function animate() {
 
             appleArray.splice(index, 1);
             appleArray.push(new Apple(apple.width, apple.height))
+            score += 10;
+            
+            // High score
+            let highest = localStorage.getItem('highScore');
+            if (score > highest || !highest){
+                localStorage.setItem('highScore', JSON.stringify(score));
+            }            
         }
     })
 
@@ -277,12 +303,10 @@ function animate() {
     }
     count = 0;
 
-
-    // problem
     let condition = last.coords[1] + last.height > canvas.height + 1 ||
-        last.coords[1] /* - last.height */ < 0 ||
+        last.coords[1] < 0 ||
         last.coords[0] + last.width > canvas.width + 1 ||
-        last.coords[0] /* - last.width */ < 0;
+        last.coords[0] < 0;
 
 
     ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -298,6 +322,7 @@ function animate() {
 
     if (condition) {
         cancelAnimationFrame(gameLoop)
+        lose()
     }
 }
 
@@ -319,6 +344,13 @@ document.addEventListener('keydown', (event) => {
 })
 
 document.querySelector('#start').addEventListener('click', createLayout)
+
+
+let previous = false;
+document.querySelector('#previous').addEventListener('click', (event) => {
+    previous = true;
+    createLayout();
+})
 
 
 function getRandomArr(snake, appleArray) {
@@ -359,4 +391,18 @@ function getRandomArr(snake, appleArray) {
     })
 
     return coords;
+}
+
+function lose() {
+    debugger
+    ctx.clearRect(0, 0, canvas.width, canvas.height)
+    let highest = JSON.parse(localStorage.getItem('highScore'))
+    ctx.font = "40px Arial";
+    console.log(score < highest);
+    if (score < highest) {
+        ctx.fillText(`Your score is ${score}`, canvas.width / 2 - 140, canvas.height / 2 )
+    }
+    else {
+        ctx.fillText(`New High Score ${score}`, canvas.width / 2 - 160, canvas.height / 2 )
+    }
 }

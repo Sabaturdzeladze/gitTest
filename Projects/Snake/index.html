@@ -1,53 +1,133 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Snake</title>
     <style>
+        body {
+            background-color: rgb(170, 204, 102);
+            font-family:Georgia, 'Times New Roman', Times, serif;
+        }
+        .userWrapper {
+            display: flex;
+            flex-wrap: wrap;
+        }
         canvas {
             border: 2px solid black;
             margin: 5px auto 0;
+            background-color: rgb(170, 204, 102);
             display: none;
+        }
+        p.previous {
+            margin-top: 25px;
+            display: inline-block;
+        }
+        input {
+            border: 2px solid rgb(145, 132, 132);
+            border-radius: 4px;
+            outline: none;
+            padding: 2px;
+            box-sizing: border-box;
+        }
+        input:focus {
+            border-color: dodgerblue;
+            box-shadow: 0 0 5px 0 dodgerblue;
+        }
+        select {
+            padding: 2px;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.5);
+            outline: none;
+        }
+        select:hover, select:focus {
+            box-shadow: 0 0 5px 0 dodgerblue;
+        }
+        select:before {
+            content: '\f358';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: inherit;
+            height: inherit;
+        }
+        .userInfo {
+            display: inline-block;
+            height: 260px;
+            width: 260px;
+        }
+        .userInputs {
+            display: inline-block;
+            width: 80%;
+            margin-right: 5px;
+        }
+        .userInputs * {
+            display: block;
+            width: 120px;
+            height: 25px;
+            line-height: 25px;
+            margin: 15px 0;
+        }
+        .userInfo *{
+            height: 25px;
+            line-height: 25px;
+            margin: 15px 0;
+        }
+        button {
+            background: rgb(49, 209, 118);
+            height: 25px;
+            color: black;
+            width: 100px;
+            border: 1px solid #338033;
+            border-radius: 4px;
+            cursor: pointer;
         }
     </style>
 </head>
+
 <body>
     <canvas width="600" height="400">
         Canvas is not supported
     </canvas>
 
     <div id="inputs">
-      <span>Select the game Level</span>
-      <select name="GameLevel" id="level">
-        <option value="Novice">Novice</option>
-        <option value="Intermediate">Intermediate</option>
-        <option value="Hard">Hard</option>
-      </select>
-      <br>
+        <div class="userWrapper">
+            <div class="userInfo">
+                <p>Select the game Level:</p>
+                <p>Board Width: </p>
+                <p>Board Height: </p>
+                <p>Apple Quantity: </p>
+                <p>Snake Length: </p>
+                <p>Snake Speed for selecter game level: </p>
+            </div>
+    
+            <div class="userInputs">
+                <select name="GameLevel" id="level">
+                    <option value="Novice">Novice</option>
+                    <option value="Intermediate">Intermediate</option>
+                    <option value="Hard">Hard</option>
+                </select>
+                <input type="text" id="width" placeholder="Board Width">
+                <input type="text" id="height" placeholder="Board Height">
+                <input type="text" id="quantity" placeholder="Apple Quantity">
+                <input type="text" id="length" placeholder="Snake Length">
+                <!-- this will modify the speed of snake depended on the game level -->
+                <!-- f.e. if user puts 2, on Novice level, this will increase the speed of the Novice level
+                speed 2 times -->
+                <input type="text" id="speed" placeholder="Snake Speed For selected game Level" value="1">
+            </div>
+        </div>
+        <br>
 
-      <input type="text" id="width" placeholder="Board Width">
-      <br>
-      <input type="text" id="height" placeholder="Board Height">
-      <br>
-      <input type="text" id="quantity" placeholder="Apple Quantity">
-      <br>
-      <input type="text" id="length" placeholder="Snake Length">
-      <br>
-
-      <!-- this will modify the speed of snake depended on the game level -->
-      <!-- f.e. if user puts 2, on Novice level, this will increase the speed of the Novice level
-      speed 2 times -->
-      <input type="text" id="speed" placeholder="Snake Speed For selected game Level" value="1"> Snake Speed For selected game Level
-      <br>
-
-      <button id="start">Start Game</button>
-
-
+        <button id="start">Start Game</button>
+        <br>
+        <p class="previous">To Use previous Inputs</p>
+        <button id="previous">Click here</button>
     </div>
 
     <script src="js/app.js"></script>
     <!-- <script src="js/main.js"></script> -->
 </body>
+
 </html>
