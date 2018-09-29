@@ -70,9 +70,14 @@ class SnakeList {
 
     draw(part) {
         ctx.beginPath();
-        ctx.fillStyle = 'green'
-        ctx.fillRect(part.coords[0], part.coords[1], part.width, part.height);
+        ctx.fillStyle = 'green';
+        ctx.strokeStyle = 'black';
+        ctx.rect(part.coords[0], part.coords[1], part.width, part.height);
+        ctx.stroke();
+        ctx.fill()
         ctx.closePath();
+
+        debugger
 
         ctx.fillStyle = 'blue';
         ctx.font = '30px Garamond';

@@ -31,7 +31,7 @@ function createLayout() {
 
     // creating snake
     let x = 10;
-    let y = (10 - ((canvas.width / 2) % 10)) + canvas.width / 2;
+    let y = (10 - ((canvas.height / 2) % 10)) + canvas.height / 2;
     let width = 10;
     let height = 10;
     for (let i = 0; i < snakeLength; i++) {
