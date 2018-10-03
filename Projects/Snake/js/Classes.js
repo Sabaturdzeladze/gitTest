@@ -77,8 +77,6 @@ class SnakeList {
         ctx.fill()
         ctx.closePath();
 
-        debugger
-
         ctx.fillStyle = 'blue';
         ctx.font = '30px Garamond';
         ctx.fillText(`Your score is ${score}`, canvas.width / 2, 30)
