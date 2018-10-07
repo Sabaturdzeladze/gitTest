@@ -24,11 +24,17 @@ app.get('/products', (req, res) => {
     //     <h2>${req.query.name} ${req.query.lastName}</h2>
     // `);
 
-    res.send(
+    // res.send(
+    //     products.map( product => {
+    //         return `<h2 id="product-${product.id}" data-id="${product.id}" 
+    //         onclick="window.location.replace('http://localhost:3000/products/${product.id}')">${product.name}</h2>`
+    //     }).join(' ')
+    // )
+
+    res.json(
         products.map( product => {
-            return `<h2 id="product-${product.id}" data-id="${product.id}" 
-            onclick="window.location.replace('http://localhost:3000/products/${product.id}')">${product.name}</h2>`
-        }).join(' ')
+            return `${product.name}`
+        })
     )
 })
 
@@ -36,16 +42,30 @@ app.get('/products/:prodId', (req, res) => {
     let id = req.params.prodId
     const product = products.find(prod => prod.id == id);
 
-    let response = 'Product not Found';
-    if (product){
-        res.send(`
-            <a href='http://localhost:3000/products'>Home</a>
-            <h1>${product.name}</h1>
-            <hr>
-            <h3>$ ${product.price}</h3>
-        `)
+    // let response = 'Product not Found';
+    // if (product){
+    //     res.send(`
+    //         <a href='http://localhost:3000/products'>Home</a>
+    //         <h1>${product.name}</h1>
+    //         <hr>
+    //         <h3>$ ${product.price}</h3>
+    //     `)
+    // }
+    // res.send(response)
+
+    if (product) {
+        res.json(product)
+    } else {
+        res.send('Product not found')
     }
-    res.send(response)
+})
+
+app.get('/product/:name', (req, res) => {
+    const name = req.params.name;
+    const product = products.find(p => p.name === name);
+
+    if (!product) return res.sendStatus(404)
+    res.json(product)
 })
 
 app.post('/products/:id/:name/:price', (req, res) => {
