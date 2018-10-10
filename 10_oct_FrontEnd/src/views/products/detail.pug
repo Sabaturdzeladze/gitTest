@@ -1,0 +1,10 @@
+mixin product(product)
+    div.product--box
+        h2.product--title--item= product.title
+        h4.product--price= `Price - $${product.price}`
+
+include ../includes/header.pug
+body
+    h1= title
+    hr
+    +product(product)
