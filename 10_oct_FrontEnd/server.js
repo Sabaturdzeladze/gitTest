@@ -32,8 +32,6 @@ App.post('/', (req, res) => {
     })
 })
 
-
-
 App.listen(PORT, () => {
     console.log(`Server PORT - ${PORT}`);
 })

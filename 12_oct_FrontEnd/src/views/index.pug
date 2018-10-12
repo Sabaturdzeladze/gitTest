@@ -1,0 +1,10 @@
+html
+    head
+        title Server
+    body(style=`background-color: ${color}`)
+        form(action="", method="post")
+            p
+                input(type="color", name="backgroundColor", required)
+            button(type="submit") Save Color
+        script.
+            document.body.style.backgroundColor = color
