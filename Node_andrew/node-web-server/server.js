@@ -27,6 +27,8 @@ app.use((req, res, next) => {
 //     next();
 // })
 
+
+
 hbs.registerHelper('getCurrentYear', () => {
     return new Date().getFullYear();
 }); // registering helpers, to provide functions for templates
@@ -46,6 +48,10 @@ app.get('/', (req, res) => {
         welcomeMessage: 'Welcome to my Web Site!'
     })
 });
+
+app.get('/projects', (req, res) => {
+    res.render('projects.hbs', {pageTitle: 'Projects Page'})
+})
 
 app.get('/about', (req, res) => {
     res.render('about.hbs', {
