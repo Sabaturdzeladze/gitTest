@@ -5,6 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Shopping Site</title>
+    <style>
+        table, td, th {
+            border: 1px solid black;
+        }
+        table {
+            border-collapse: collapse;
+        }
+    </style>
 </head>
 <body>
     {{> header}}
@@ -22,20 +30,21 @@
             <td>{{graphics.title}}</td>
             <td>{{graphics.price}}$</td>
             <td>{{graphics.quantity}}</td>
-            <td>{{graphics.total}}</td>
+            <td>{{graphics.total}}$</td>
         </tr>
         <tr>
             <td>{{HDMI.title}}</td>
             <td>{{HDMI.price}}$</td>
             <td>{{HDMI.quantity}}</td>
-            <td>{{HDMI.total}}</td>
+            <td>{{HDMI.total}}$</td>
         </tr>
         <tr>
             <td>{{SSD.title}}</td>
             <td>{{SSD.price}}$</td>
             <td>{{SSD.quantity}}</td>
-            <td>{{SSD.total}}</td>
+            <td>{{SSD.total}}$</td>
         </tr>
     </table>
+    <p>Total: {{total.totalPrice}}$</p>
 </body>
 </html>

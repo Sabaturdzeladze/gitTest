@@ -1,6 +1,7 @@
 const express = require('express');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
+const bodyParser = require('body-parser');
 const hbs = require('hbs') // using hbs template engine
 
 const app = express();
@@ -50,7 +51,13 @@ app.use(session({
     name: 'shopping cart',
     resave: true,
     saveUninitialized: false
+}));
+app.use(bodyParser.urlencoded({
+    extended: false
 }))
+app.use(express.static('public'));
+
+
 
 app.get('/', (req, res) => {
     res.render('index.hbs');
@@ -76,29 +83,30 @@ app.get(MyPages.total.url, (req, res) => {
 
 // POSTS
 app.post(MyPages.graphics.url, (req, res) => {
-    let count = req.body.quantity;
-    console.log(count);
-
-    // MyPages.graphics.quantity += count;
-    // MyPages.graphics.total += (count * MyPages.graphics.price);
-    // MyPages.total.totalPrice += (count * MyPages.graphics.price);
-    res.render('graphics.hbs', MyPages.graphics);
+    let count = parseFloat(req.body.quantity);
+    MyPages.graphics.quantity += count;
+    MyPages.graphics.total += (count * MyPages.graphics.price);
+    MyPages.total.totalPrice += (count * MyPages.graphics.price);
+    req.session.graphics = MyPages.graphics;
+    res.render('graphics.hbs', req.session.graphics);
 })
 
 app.post(MyPages.HDMI.url, (req, res) => {
-    let count = req.body.quantity;
+    let count = parseFloat(req.body.quantity);
     MyPages.HDMI.quantity += count;
     MyPages.HDMI.total += (count * MyPages.HDMI.price);
     MyPages.total.totalPrice += (count * MyPages.HDMI.price);
-    res.render('hdmi.hbs', MyPages.HDMI);
+    req.session.HDMI = MyPages.HDMI;
+    res.render('hdmi.hbs', req.session.HDMI);
 })
 
 app.post(MyPages.SSD.url, (req, res) => {
-    let count = req.body.quantity;
+    let count = parseFloat(req.body.quantity);
     MyPages.SSD.quantity += count;   
     MyPages.SSD.total += (count * MyPages.SSD.price);
     MyPages.total.totalPrice += (count * MyPages.SSD.price);
-    res.render('ssd.hbs', MyPages.SSD);
+    req.session.SSD = MyPages.SSD;
+    res.render('ssd.hbs', req.session.SSD);
 })
 
 
