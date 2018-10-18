@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>{{name}}</title>
+    <style>
+        a {
+            text-decoration: none;
+            color: black;
+            border: 1px solid grey;
+            background-color: rgb(230, 218, 218);
+            padding: 3px 15px;
+        }
+    </style>
+</head>
+<body>
+    <h1>{{name}} {{surname}}</h1>
+    <p>id: {{id}}</p>
+    <p>Father's name: {{father}}</p>
+    <p>Birth Date: {{birthDate}}</p>
+    
+    {{#if cars.length}}
+        <p>Owns :</p>
+        {{#each cars}}
+            {{!-- ყოველთვის გადადის წინა მფლობელის - id - ზე --}}
+            <p>{{this.name}} {{this.model}} {{this.owner}} <a href="/users/{{this.owner.id}}/cars/{{this.VIN}}/edit">Edit Car</a></p>
+        {{/each}}
+    {{/if}}
+    <p><a href="/users/{{id}}/cars/add">Add Cars</a></p>
+    <p>
+       <a href="/users/{{id}}/edit">Edit User</a>
+    </p>
+    <form action="" method="post">
+        <input type="submit" value="Delete" name="delete">
+    </form>
+</body>
+</html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Car</title>
+</head>
+<body>
+    {{> header}}
+
+    <p>Make: {{make}}</p>
+    <p>Model: {{model}}</p>
+    <p>VIN: {{VIN}}</p>
+    <p>Government ID: {{govId}}</p>
+    <p>Color: {{color}}</p>
+    <p>Owner: {{owner.name}} {{owner.surname}}</p>
+    {{#if lastOwner}}
+        <p>Last Owner: {{lastOwner.name}} {{lastOwner.surname}}</p>
+    {{/if}}
+    <a href="/users/{{owner.id}}/cars/{{VIN}}/edit">Edit car</a>
+</body>
+</html>
