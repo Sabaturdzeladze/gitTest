@@ -104,6 +104,8 @@ app.post('/users/search', (req, res) => {
 app.get('/users/:id', (req, res) => {
     const id = parseInt(req.params.id);
     const user = users.find(u => u.id === id);
+    console.log(`----------------------------------`);
+    console.log(cars);
     // poulobs axal users magram getUser-shi mainc dzvel users machvenebs
     if(!user) {
         return res.status(404).send(`User Not Found`);
@@ -171,24 +173,30 @@ app.post('/users/:id/cars/:VIN/edit', (req, res) => {
 
     const make = req.body.make || car.make;
     const model = req.body.model || car.model;
-    const VIN = req.body.VIN || car.VIN;
-    const govId = req.body.govId || car.govId;
+    const VIN = parseInt(req.body.VIN) || car.VIN;
+    const govId = parseInt(req.body.govId) || car.govId;
     const color = req.body.color || car.color;
     const newOwner = req.body.newOwner || '';
     let lastOwner;
 
     if (newOwner) {
         let input = newOwner.split(' ')
-        let owner = users.find(u => {
-            return u.name === input[0] && u.surname === input[1];
-        });
+        let owner = users.find(u => u.name === input[0] && u.surname === input[1]);
         if (!owner) {
             return res.status(404).send(`A new Owner Must be registered`);
         } else {
-            let index = user.cars.indexOf(car);
-            user.cars.splice(index, 1);
+            let usersCarIndex = user.cars.indexOf(car);
+            user.cars.splice(usersCarIndex, 1);
+            let carIndex = cars.indexOf(car);
+            cars.splice(carIndex, 1);
             car.owner = owner;
+            console.log(car.owner === owner);
             owner.cars.push(car);
+            cars.push(car);
+            cars[cars.length - 1].owner = owner;
+            console.log(`-------------------`);
+            // console.log(car.owner === cars[cars.length - 1].owner);
+            console.log(cars);
         }
     }
 
@@ -224,7 +232,6 @@ app.post('/users/:id/cars/add', (req, res) => {
 
     let newCar = new Car(make, model, VIN, govId, color, user, lastOwner)
     user.cars.push(newCar);
-    cars.push(newCar);
     res.redirect(`/users/${user.id}`);
 })
 

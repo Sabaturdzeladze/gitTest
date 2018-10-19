@@ -25,7 +25,7 @@
         <p>Owns :</p>
         {{#each cars}}
             {{!-- ყოველთვის გადადის წინა მფლობელის - id - ზე --}}
-            <p>{{this.name}} {{this.model}} {{this.owner}} <a href="/users/{{this.owner.id}}/cars/{{this.VIN}}/edit">Edit Car</a></p>
+            <p>{{this.name}} {{this.model}} {{this.owner.name}} <a href="/users/{{this.owner.id}}/cars/{{this.VIN}}/edit">Edit Car</a></p>
         {{/each}}
     {{/if}}
     <p><a href="/users/{{id}}/cars/add">Add Cars</a></p>
