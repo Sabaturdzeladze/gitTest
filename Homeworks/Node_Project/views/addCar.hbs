@@ -1,22 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Add Car</title>
+    <style>
+        a {
+            text-decoration: none;
+            color: black;
+            border: 1px solid grey;
+            background-color: rgb(230, 218, 218);
+            padding: 3px 15px;
+        }
+    </style>
 </head>
+
 <body>
+    {{> header}}
     <form action="" method="post">
         <p>Add Car for {{name}} {{surname}}</p>
         <input type="text" name="make" placeholder="Car Make" required><br>
         <input type="text" name="model" placeholder="Car Model" required><br>
         <input type="text" name="VIN" placeholder="VIN" required><br>
-        <input type="text" name="govId" placeholder="Government's ID" required><br>
+        <input type="text" name="govID" placeholder="Government's ID" required><br>
         <input type="text" name="color" placeholder="Color" required><br>
         <input type="text" name="lastOwner" placeholder="Last Owner"><br>
-        
+
         <button type="submit">Add Car</button>
     </form>
 </body>
+
 </html>

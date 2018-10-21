@@ -59,10 +59,14 @@ class Car {
 }
 // #endregion Car Class
 // #endregion Classes
-const users = [new User('Saba', 'Turdzeladze', 0, 'Daviti', '07.12.1997'), 
+const users = [
+    new User('Saba', 'Turdzeladze', 0, 'Daviti', '07.12.1997'), 
     new User('Jaba', 'Lipartia', 2, 'Jaba', '01.01.1987')
 ];
-
+let joni = new User('Joni', 'Jonidze', 1, 'Mama', '12.02.1990');
+users.push(joni);
+let car = new Car('Mercedes', 'e320', 213, 123, 'green', joni);
+joni.cars.push(car)
 
 
 app.get('/', (req, res) => {
@@ -81,6 +85,11 @@ app.post('/users/add', (req, res) => {
     const father = req.body.father || 'No information';
     const birthDate = req.body.birthDate || 'No information';
 
+    for(let user of users){
+        if(user.id === id){
+            return res.send(`User with this ID already exists`)
+        }
+    }
     const user = new User(name, surname, id, father, birthDate);
     users.push(user);
     res.redirect(`/users/${id}`);
@@ -91,10 +100,15 @@ app.get('/users/search', (req, res) => {
 });
 app.post('/users/search', (req, res) => {
     const body = req.body;
-    const user = users.find(u => {
-        return u.name === body.name && u.surname === body.surname;
-    });
-
+    let user = {};
+    if (body.name && body.surname) {
+        user = users.find(u => {
+            return u.name === body.name && u.surname === body.surname;
+        });
+    }
+    else if (body.id) {
+        user = users.find(u => u.id === parseInt(body.id));
+    }
     if(!user) {
         return res.status(404).send(`User Not Found`);
     }
@@ -104,9 +118,6 @@ app.post('/users/search', (req, res) => {
 app.get('/users/:id', (req, res) => {
     const id = parseInt(req.params.id);
     const user = users.find(u => u.id === id);
-    console.log(`----------------------------------`);
-    console.log(cars);
-    // poulobs axal users magram getUser-shi mainc dzvel users machvenebs
     if(!user) {
         return res.status(404).send(`User Not Found`);
     }
@@ -151,6 +162,7 @@ app.post('/users/:id/edit', (req, res) => {
 })
 
 
+// ---------------------------------------------------------------------
 // Cars
 app.get('/users/:id/cars/:VIN/edit', (req, res) => {
     const id = parseInt(req.params.id);
@@ -163,7 +175,7 @@ app.get('/users/:id/cars/:VIN/edit', (req, res) => {
     } else if(!car) {
         return res.status(404).send(`<p>This user does not own this car`)
     }
-    res.render('editCar.hbs', user)
+    res.render('editCar.hbs', {user, car});
 })
 app.post('/users/:id/cars/:VIN/edit', (req, res) => {
     const id = parseInt(req.params.id);
@@ -174,7 +186,7 @@ app.post('/users/:id/cars/:VIN/edit', (req, res) => {
     const make = req.body.make || car.make;
     const model = req.body.model || car.model;
     const VIN = parseInt(req.body.VIN) || car.VIN;
-    const govId = parseInt(req.body.govId) || car.govId;
+    const govID = parseInt(req.body.govID) || car.govID;
     const color = req.body.color || car.color;
     const newOwner = req.body.newOwner || '';
     let lastOwner;
@@ -187,16 +199,10 @@ app.post('/users/:id/cars/:VIN/edit', (req, res) => {
         } else {
             let usersCarIndex = user.cars.indexOf(car);
             user.cars.splice(usersCarIndex, 1);
-            let carIndex = cars.indexOf(car);
-            cars.splice(carIndex, 1);
-            car.owner = owner;
-            console.log(car.owner === owner);
+            car.lastOwner = user;
             owner.cars.push(car);
-            cars.push(car);
-            cars[cars.length - 1].owner = owner;
-            console.log(`-------------------`);
-            // console.log(car.owner === cars[cars.length - 1].owner);
-            console.log(cars);
+            car.edit(make, model, VIN, govID, color, owner)
+            return res.redirect(`/users/${id}`)
         }
     }
 
@@ -205,12 +211,13 @@ app.post('/users/:id/cars/:VIN/edit', (req, res) => {
         lastOwner = users.find(u => u.name === arr[0] && u.surname === arr[1]);
     }
 
-    car.edit(make, model, VIN, govId, color, user)
+    car.edit(make, model, VIN, govID, color, user)
 
     res.redirect(`/users/${id}`)
 })
 
 
+// add cars for users
 // "/users/{{id}}/cars/add"
 app.get('/users/:id/cars/add', (req, res) => {
     const id = parseInt(req.params.id);
@@ -226,14 +233,73 @@ app.post('/users/:id/cars/add', (req, res) => {
     const make = req.body.make;
     const model = req.body.model;
     const VIN = parseInt(req.body.VIN);
-    const govId = parseInt(req.body.govId);
+    const govID = parseInt(req.body.govID);
     const color = req.body.color;
     const lastOwner = req.body.lastOwner;
 
-    let newCar = new Car(make, model, VIN, govId, color, user, lastOwner)
+    for (let car of cars) {
+        if (car.VIN === VIN) {
+            return res.send(`Car with this VIN code already exists`)
+        }
+    }
+
+    let newCar = new Car(make, model, VIN, govID, color, user, lastOwner)
     user.cars.push(newCar);
     res.redirect(`/users/${user.id}`);
 })
+
+// search cars
+app.get('/cars/search', (req, res) => {
+    if (!cars.length) {
+        res.status(400).send(`There are no Cars`)
+    }
+    else {
+        res.render('carSearch.hbs')
+    }
+})
+app.post('/cars/search', (req, res) => {
+    const make = req.body.make;
+    const model = req.body.model;
+    const VIN = parseInt(req.body.VIN);
+    const govID = parseInt(req.body.govID);
+
+    if (make && model) {
+        const car = cars.find(c => c.make === make && c.model === model)
+        return res.redirect(`/cars/${car.VIN}`)
+    }
+    else if (VIN) {
+        const car = cars.find(c => c.VIN === VIN)
+        return res.redirect(`/cars/${car.VIN}`)
+    }
+    else if (govID) {
+        const car = cars.find(c => c.govID === govID)
+        return res.redirect(`/cars/${car.VIN}`)
+    }
+})
+
+// get car
+app.get('/cars/:VIN', (req, res) => {
+    const VIN = parseInt(req.params.VIN);
+    const car = cars.find(c => c.VIN === VIN);
+
+    res.render('getCar.hbs', car)
+})
+
+// delete car
+app.get('/cars/:VIN/delete', (req, res) => {
+    const VIN = parseInt(req.params.VIN);
+    const car = cars.find(c => c.VIN === VIN);
+
+    if (car){
+        const index = cars.indexOf(car);
+        cars.splice(index, 1);
+        const carIndex = car.owner.cars.indexOf(car);
+        car.owner.cars.splice(carIndex, 1);
+    }
+    res.redirect('/');
+})
+
+// add cars
 
 app.listen(PORT, () => {
     console.log(`Server is on Port - ${PORT}`);

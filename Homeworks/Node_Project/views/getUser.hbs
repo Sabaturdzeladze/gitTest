@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,25 +16,37 @@
         }
     </style>
 </head>
+
 <body>
+    {{> header}}
     <h1>{{name}} {{surname}}</h1>
+    <p>Name: {{name}}</p>
+    <p>Surname: {{surname}}</p>
     <p>id: {{id}}</p>
     <p>Father's name: {{father}}</p>
     <p>Birth Date: {{birthDate}}</p>
-    
+
     {{#if cars.length}}
-        <p>Owns :</p>
+        <p>This person has {{cars.length}} Cars</p>
         {{#each cars}}
-            {{!-- ყოველთვის გადადის წინა მფლობელის - id - ზე --}}
-            <p>{{this.name}} {{this.model}} {{this.owner.name}} <a href="/users/{{this.owner.id}}/cars/{{this.VIN}}/edit">Edit Car</a></p>
+            <div style="padding-bottom: 10px; background-color: seagreen; display: inline-block; text-align: center;">
+                <p>Make: {{this.make}} </p>
+                <p>Model: {{this.model}} </p>
+                <p>Color: {{this.color}} </p>
+                <p>VIN: {{this.VIN}} </p>
+                <p>Government ID: {{this.govID}} </p>
+                <a href="/users/{{this.owner.id}}/cars/{{this.VIN}}/edit">Edit Car</a>
+                <a href="/cars/{{this.VIN}}/delete">Delete Car</a>
+            </div>
         {{/each}}
     {{/if}}
     <p><a href="/users/{{id}}/cars/add">Add Cars</a></p>
     <p>
-       <a href="/users/{{id}}/edit">Edit User</a>
+        <a href="/users/{{id}}/edit">Edit User</a>
     </p>
     <form action="" method="post">
         <input type="submit" value="Delete" name="delete">
     </form>
 </body>
+
 </html>

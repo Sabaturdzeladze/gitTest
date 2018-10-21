@@ -7,14 +7,15 @@
     <title>Edit Car</title>
 </head>
 <body>
+    {{> header}}
     <form action="" method="post">
-        <p>Edit Car for {{name}} {{surname}}</p>
-        <input type="text" name="make" placeholder="Car Make"><br>
-        <input type="text" name="model" placeholder="Car Model"><br>
-        <input type="text" name="VIN" placeholder="VIN"><br>
-        <input type="text" name="govId" placeholder="Government's ID"><br>
-        <input type="text" name="color" placeholder="Color"><br>
-        <input type="text" name="lastOwner" placeholder="Last Owner"><br>
+        <p>Edit Car for {{user.name}} {{user.surname}}</p>
+        <input type="text" name="make" placeholder={{car.make}}><br>
+        <input type="text" name="model" placeholder={{car.model}}><br>
+        <input type="text" name="VIN" placeholder={{car.VIN}}><br>
+        <input type="text" name="govID" placeholder={{car.govID}}><br>
+        <input type="text" name="color" placeholder={{car.color}}><br>
+        <input type="text" name="lastOwner" placeholder={{car.lastOwner}}><br>
         <input type="text" name="newOwner" placeholder="New Owner"><br>
         
         <button type="submit">Edit Car</button>

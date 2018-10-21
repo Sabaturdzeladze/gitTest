@@ -5,13 +5,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Search User</title>
+    <style>
+        a {
+            text-decoration: none;
+            color: black;
+            border: 1px solid grey;
+            background-color: rgb(230, 218, 218);
+            padding: 3px 15px;
+        }
+    </style>
 </head>
 <body>
     {{> header}}
+    <form action="" method="post" style="margin-bottom: 20px">
+        <input type="text" name="make" placeholder="Make" required><br>
+        <input type="text" name="model" placeholder="Model" required><br>
+        Search By Make and Model <button type="submit">Search</button><br>
+    </form>
+    <form action="" method="post" style="margin-bottom: 20px">
+        <input type="text" name="VIN" placeholder="VIN" required><br>
+        Search By VIN<button type="submit">Search</button><br>
+    </form>
     <form action="" method="post">
-        <input type="text" name="name" placeholder="Name" required>
-        <input type="text" name="surname" placeholder="Surname" required>
-        <button type="submit">Search</button>
+        <input type="text" name="govID" placeholder="Government ID" required><br>
+        Search By Government ID<button type="submit">Search</button><br>
     </form>
 </body>
 </html>
