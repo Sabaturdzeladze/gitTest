@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>AJAX Exercise</title>
+    <link rel="stylesheet" href="css/main.css">
+</head>
+
+<body>
+    <div>
+        <input list="brands">
+        <datalist id="brands"></datalist>
+    </div>
+    <script>
+        const input = document.querySelector('input');
+        const datalist = document.getElementById('brands');
+        input.addEventListener('keyup', (e) => {
+            datalist.innerHTML = '';
+            let url = `/country/${e.target.value}`;
+            fetch(url)
+            .then(res => res.json())
+            .then(countries => {
+                countries.forEach(element => {
+                    const option = document.createElement('option');
+                    option.value = element.name;
+                    datalist.appendChild(option);
+                });
+            })
+        })
+    </script>
+</body>
+
+</html>
