@@ -11,6 +11,9 @@ app.use( express.json() ) // to use json data and req.body
 // /api/movies/:id        ...
 app.use('/api', MoviesController)
 
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, '/public', 'index.html'))
+})
 
 
 const PORT = process.env.PORT || 3000;
