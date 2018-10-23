@@ -112,6 +112,10 @@ app.post('/users/search', (req, res) => {
     if(!user) {
         return res.status(404).send(`User Not Found`);
     }
+
+    if (user.disabled) {
+        return res.send(`This User is temporarily disabled`)
+    }
     res.redirect(`/users/${user.id}`);
 })
 
@@ -121,6 +125,11 @@ app.get('/users/:id', (req, res) => {
     if(!user) {
         return res.status(404).send(`User Not Found`);
     }
+
+    if (user.disabled) {
+        return res.send(`This User is temporarily disabled`)
+    }
+
     res.render('getUser.hbs', user);
 })
 
@@ -130,6 +139,10 @@ app.post('/users/:id', (req, res) => {
 
     const index = users.indexOf(user);
     users.splice(index, 1);
+
+    if (user.disabled) {
+        return res.send(`This User is temporarily disabled`)
+    }
 
     if(!user) {
         return res.status(404).send(`User Not Found`);
@@ -141,6 +154,10 @@ app.post('/users/:id', (req, res) => {
 app.get('/users/:id/edit', (req, res) => {
     const id = parseInt(req.params.id);
     const user = users.find(u => u.id === id);
+
+    if (user.disabled) {
+        return res.send(`This User is temporarily disabled`)
+    }
 
     if(!user) {
         return res.status(404).send(`User Not Found`);
@@ -169,6 +186,14 @@ app.get('/users/:id/cars/:VIN/edit', (req, res) => {
     const VIN = parseInt(req.params.VIN);
     let user = users.find(u => u.id === id);
     let car = user.cars.find(c => c.VIN === VIN);
+
+    if (user.disabled) {
+        return res.send(`Owner of this car is temporarily Disabled`)
+    }
+
+    if (car.disabled) {
+        return res.send(`Car was temporarily Disabled`)
+    }
 
     if (!user.cars.length) {
         return res.status(404).send(`<p>This user does not have any car`)
@@ -223,6 +248,10 @@ app.get('/users/:id/cars/add', (req, res) => {
     const id = parseInt(req.params.id);
     let user = users.find(u => u.id === id);
 
+    if (user.disabled) {
+        return res.send(`This User is temporarily Disabled`)
+    }
+
     res.render('addCar.hbs', {name: user.name, surname: user.surname})
 })
 app.post('/users/:id/cars/add', (req, res) => {
@@ -264,16 +293,37 @@ app.post('/cars/search', (req, res) => {
     const govID = parseInt(req.body.govID);
 
     if (make && model) {
-        const car = cars.find(c => c.make === make && c.model === model)
+        const car = cars.find(c => c.make === make && c.model === model);
+        if (car.owner.disabled) {
+            return res.send(`Owner of this car is temporarily Disabled`)
+        }
+    
+        if (car.disabled) {
+            return res.send(`Car was temporarily Disabled`)
+        }
         return res.redirect(`/cars/${car.VIN}`)
     }
     else if (VIN) {
-        const car = cars.find(c => c.VIN === VIN)
+        const car = cars.find(c => c.VIN === VIN);
+        if (car.owner.disabled) {
+            return res.send(`Owner of this car is temporarily Disabled`)
+        }
+    
+        if (car.disabled) {
+            return res.send(`Car was temporarily Disabled`)
+        }
         return res.redirect(`/cars/${car.VIN}`)
     }
     else if (govID) {
-        const car = cars.find(c => c.govID === govID)
-        return res.redirect(`/cars/${car.VIN}`)
+        const car = cars.find(c => c.govID === govID);
+        if (car.owner.disabled) {
+            return res.send(`Owner of this car is temporarily Disabled`)
+        }
+    
+        if (car.disabled) {
+            return res.send(`Car was temporarily Disabled`)
+        }
+        return res.redirect(`/cars/${car.VIN}`);
     }
 })
 
@@ -299,7 +349,113 @@ app.get('/cars/:VIN/delete', (req, res) => {
     res.redirect('/');
 })
 
-// add cars
+// Admin Panel
+app.get('/admin', (req, res) => {
+    res.render('admin.hbs')
+})
+
+// searching users, or cars
+app.post('/admin', (req, res) => {
+    const name = req.body.name;
+    const surname = req.body.surname;
+    const id = parseInt(req.body.id);
+    let user;
+    
+    const make = req.body.make;
+    const model = req.body.model;
+    const VIN = parseInt(req.body.VIN);
+    const govID = parseInt(req.body.govID);
+    let car;
+
+    //users filter
+    if (name && surname) {
+        user = users.find(u => {
+            return u.name.toLowerCase() === name.toLowerCase() && u.surname.toLowerCase() === surname.toLowerCase();
+        });
+        if (!user){
+            return res.sendStatus(404)
+        }
+    }
+    else if (id || id === 0) { // id === 0; for testing my demo users
+        user = users.find(u => u.id === parseInt(id));
+        if (!user){
+            return res.sendStatus(404)
+        }
+    }
+    if(user) {
+        return res.render('admin.hbs', {adminUser: true, user})
+    }
+
+    // Cars filter
+    if (make && model) {
+        car = cars.find(c => c.make.toLowerCase() === make.toLowerCase() && c.model.toLowerCase() === model.toLowerCase())
+        if (!car) {
+            return res.status(404).send(`Car Not Found`);
+        }
+    }
+    else if (VIN) {
+        car = cars.find(c => c.VIN === VIN);
+        if (!car) {
+            return res.status(404).send(`Car Not Found`);
+        }
+    }
+    else if (govID) {
+        car = cars.find(c => c.govID === govID);
+        if (!car) {
+            return res.status(404).send(`Car Not Found`);
+        }
+    }
+
+    if(car) {
+        return res.render('admin.hbs', {adminCar: true, car})
+    }
+})
+
+// configuring user (delete, disable, enable)
+app.post('/admin/user/:id', (req, res) => {
+    const del = req.body.delete;
+    const enable = req.body.enable;
+    const disable = req.body.disable;
+    const id = parseInt(req.params.id);
+    const user = users.find(u => u.id === id);
+    const index = users.indexOf(user);
+
+    if (del) {
+        users.splice(index, 1);
+    }
+    else if (enable) {
+        user.disabled = false;
+    }
+    else if (disable) {
+        user.disabled = true;
+    }
+    res.redirect('/admin')
+})
+
+// configuring car
+app.post('/admin/car/:VIN', (req, res) => {
+    const del = req.body.delete;
+    const enable = req.body.enable;
+    const disable = req.body.disable;
+    const VIN = parseInt(req.params.VIN);
+    const car = cars.find(c => c.VIN === VIN);
+    const index = cars.indexOf(car);
+
+    if (del) {
+        cars.splice(index, 1);
+        const carIndex = car.owner.cars.indexOf(car);
+        car.owner.cars.splice(carIndex, 1);
+    }
+    else if (enable) {
+        car.disabled = false;
+    }
+    else if (disable) {
+        car.disabled = true;
+    }
+    res.redirect('/admin')
+})
+
+
 
 app.listen(PORT, () => {
     console.log(`Server is on Port - ${PORT}`);

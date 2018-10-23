@@ -14,6 +14,34 @@
             background-color: rgb(230, 218, 218);
             padding: 3px 15px;
         }
+        input {
+            padding: 3px;
+            border: 2px solid #aaa;
+            border-radius: 4px;
+            margin-bottom: 3px;
+        }
+        input:focus {
+            box-shadow: 0 0 5px 0 dodgerblue;
+        }
+        input[type="submit"]{
+            cursor: pointer;
+        }
+        button {
+            background-color: rgb(68, 68, 228);
+            border: 0;
+            padding: 5px 10px;
+            border-radius: 5px;
+            color: white;
+            cursor: pointer;
+        }
+        .block {
+            padding-bottom: 10px;
+            background-color: seagreen;
+            display: inline-block;
+            text-align: center;
+            color: rgb(236, 228, 228);
+            width: 230px;
+        }
     </style>
 </head>
 
@@ -29,7 +57,7 @@
     {{#if cars.length}}
         <p>This person has {{cars.length}} Cars</p>
         {{#each cars}}
-            <div style="padding-bottom: 10px; background-color: seagreen; display: inline-block; text-align: center;">
+            <div class="block">
                 <p>Make: {{this.make}} </p>
                 <p>Model: {{this.model}} </p>
                 <p>Color: {{this.color}} </p>
@@ -41,11 +69,9 @@
         {{/each}}
     {{/if}}
     <p><a href="/users/{{id}}/cars/add">Add Cars</a></p>
-    <p>
-        <a href="/users/{{id}}/edit">Edit User</a>
-    </p>
+    <p><a href="/users/{{id}}/edit">Edit User</a></p>
     <form action="" method="post">
-        <input type="submit" value="Delete" name="delete">
+        <input type="submit" value="Delete User" name="delete">
     </form>
 </body>
 

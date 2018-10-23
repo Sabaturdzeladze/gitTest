@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Search User</title>
+    <style>
+        .wrapper {
+            display: flex;
+            justify-content: space-between;
+        }
+        a {
+            text-decoration: none;
+            color: black;
+            border: 1px solid grey;
+            background-color: rgb(230, 218, 218);
+            padding: 3px 15px;
+        }
+        input {
+            padding: 3px;
+            border: 2px solid #aaa;
+            border-radius: 4px;
+            margin-bottom: 3px;
+        }
+        input:focus {
+            box-shadow: 0 0 5px 0 dodgerblue;
+        }
+        input[type="submit"]{
+            cursor: pointer;
+        }
+        button {
+            background-color: rgb(68, 68, 228);
+            border: 0;
+            padding: 5px 10px;
+            border-radius: 5px;
+            color: white;
+            cursor: pointer;
+        }
+        .users, .cars {
+            display: flex;
+            border-left: 3px solid grey;
+            border-top: 3px solid grey;
+            border-right: 3px solid grey;
+            {{!-- border-radius: 10px; --}}
+            padding: 0 0 10px 5px;
+            height: 400px;
+            width: 49%;
+        }
+        .block {
+            padding-bottom: 10px;
+            background-color: seagreen;
+            display: inline-block;
+            text-align: center;
+            color: rgb(236, 228, 228);
+            width: 230px;
+        }
+        .found-user, .found-car {
+            margin-left: 30px;
+            padding: 0 5px;
+            background-color: #999;
+        }
+    </style>
+</head>
+
+<body>
+    {{> header}}
+    <div class="wrapper">
+        <div class="users">
+            <div class="search-user">
+                <h2>Search Users</h2>
+                <form action="" method="post">
+                    <input type="text" name="name" placeholder="Name" required><br>
+                    <input type="text" name="surname" placeholder="Surname" required><br>
+                    Search by Name and Surname: <button type="submit">Search</button>
+                </form>
+                <br>
+                <form action="" method="post">
+                    <input type="text" name="id" placeholder="ID" required><br>
+                    Search by ID: <button>Search</button>
+                </form>
+            </div>
+            {{#if adminUser}}
+                <div class="found-user">
+                    <h1>{{user.name}} {{user.surname}}</h1>
+                    <p>Name: {{user.name}}</p>
+                    <p>Surname: {{user.surname}}</p>
+                    <p>id: {{user.id}}</p>
+                    <p>Father's name: {{user.father}}</p>
+                    <p>Birth Date: {{user.birthDate}}</p>
+                
+                    {{#if user.cars.length}}
+                        <p>This person has {{user.cars.length}} Cars</p>
+                        {{#each user.cars}}
+                            <div class="block">
+                                <p>Make: {{this.make}} </p>
+                                <p>Model: {{this.model}} </p>
+                                <p>Color: {{this.color}} </p>
+                                <p>VIN: {{this.VIN}} </p>
+                                <p>Government ID: {{this.govID}} </p>
+                                <a href="/users/{{this.owner.id}}/cars/{{this.VIN}}/edit">Edit Car</a>
+                                <a href="/cars/{{this.VIN}}/delete">Delete Car</a>
+                            </div>
+                        {{/each}}
+                    {{/if}}
+                    <p><a href="/users/{{user.id}}/cars/add">Add Cars</a></p>
+                    <p><a href="/users/{{user.id}}/edit">Edit User</a></p>
+                    <form action="http://localhost:3000/admin/user/{{user.id}}" method="post">
+                        <input type="submit" value="Delete User" name="delete">
+                        {{#if user.disabled}}
+                            <input type="submit" value="Enable User" name="enable">
+                        {{else}}
+                            <input type="submit" value="Disable User" name="disable">
+                        {{/if}}
+                    </form>
+                </div>
+            {{/if}}
+        </div>
+
+        <div class="cars">
+            <div class="search-car">
+                <h2>Search Cars</h2>
+
+                <form action="" method="post" style="margin-bottom: 20px">
+                    <input type="text" name="make" placeholder="Make" required><br>
+                    <input type="text" name="model" placeholder="Model" required><br>
+                    Search By Make and Model: <button type="submit">Search</button><br>
+                </form>
+                <form action="" method="post" style="margin-bottom: 20px">
+                    <input type="text" name="VIN" placeholder="VIN" required><br>
+                    Search By VIN: <button type="submit">Search</button><br>
+                </form>
+                <form action="" method="post">
+                    <input type="text" name="govID" placeholder="Government ID" required><br>
+                    Search By Government ID: <button type="submit">Search</button><br>
+                </form>
+            </div>
+            {{#if adminCar}}
+            <div class="found-car">
+                <div class="border">
+                    <p>Make: {{car.make}}</p>
+                    <p>Model: {{car.model}}</p>
+                    <p>VIN: {{car.VIN}}</p>
+                    <p>Government ID: {{car.govID}}</p>
+                    <p>Color: {{car.color}}</p>
+                    <p>Owner: {{car.owner.name}} {{car.owner.surname}}</p>
+                    {{#if car.lastOwner}}
+                    <p>Last Owner: {{car.lastOwner.name}} {{car.lastOwner.surname}}</p>
+                    {{/if}}
+                    <form action="http://localhost:3000/admin/car/{{car.VIN}}" method="post">
+                        <input type="submit" value="Delete Car" name="delete">
+                        {{#if car.disabled}}
+                            <input type="submit" value="Enable Car" name="enable">
+                        {{else}}
+                            <input type="submit" value="Disable Car" name="disable">
+                        {{/if}}
+                    </form>
+                </div>
+            </div>
+            {{/if}}
+        </div>
+    </div>
+</body>
+
+</html>
