@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Movie System</title>
+    <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+    
+
+    <div class="container">
+        <table id="moviesTable">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Description</th>
+                    <th>Genre</th>
+                    <th>Year</th>
+                </tr>
+            </thead>
+            <tbody id="moviesList">
+                
+            </tbody>
+        </table>
+    </div>
+
+    <h2>Add new Movie</h2>
+    <div>
+        <table>
+            <tr>
+                <td>Title:</td>
+                <td><input type="text" id="title" /></td>
+            </tr>
+            <tr>
+                <td>Description: </td>
+                <td><textarea id="description" cols="40" rows="5"></textarea></td>
+            </tr>
+            <tr>
+                <td>Director:</td>
+                <td><input type="text" id="director" /></td>
+            </tr>
+            <tr>
+                <td>Release year:</td>
+                <td><input type="number" id="releaseYear"></td>
+            </tr>
+        </table>
+    </div>
+    <button id="btnAddMovie">Add Movie</button>
+
+    <script src="js/app.js"></script>
+</body>
+</html>

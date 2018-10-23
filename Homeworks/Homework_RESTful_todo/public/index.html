@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Todos Page</title>
+    <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+    <div class="container">
+        <table id="todosTable">
+            <thead>
+                <tr>
+                    <th>Task</th>
+                    <th>Description</th>
+                    <th>Start Date</th>
+                    <th>End Date</th>
+                </tr>
+            </thead>
+            <tbody id="todosList">
+                
+            </tbody>
+        </table>
+    </div>
+
+    <h2>Add new Todo</h2>
+    <div>
+        <table>
+            <tr>
+                <td>Task:</td>
+                <td><input type="text" id="task" /></td>
+            </tr>
+            <tr>
+                <td>Description: </td>
+                <td><textarea id="description" cols="40" rows="5"></textarea></td>
+            </tr>
+            <tr>
+                <td>Start Date:</td>
+                <td><input type="text" id="startDate" /></td>
+            </tr>
+            <tr>
+                <td>End Date: </td>
+                <td><input type="text" id="endDate"></td>
+            </tr>
+        </table>
+    </div>
+    <button id="btnAddTodo">Add Todo</button>
+    <script src="js/app.js"></script>
+</body>
+</html>

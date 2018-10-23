@@ -1,0 +1,24 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    width: 60%;
+    margin: 0 auto;
+}
+
+#todosTable {
+    border-collapse: collapse;
+    margin-top: 5px;
+    width: 100%;
+}
+
+#todosTable th,
+#todosTable td {
+    border: 1px solid black;
+    padding: 5px;
+}
+button {
+    padding: 2px 8px;
+}
