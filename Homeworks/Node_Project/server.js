@@ -1,7 +1,4 @@
 const express = require('express');
-const cookieParser = require('cookie-parser');
-const session = require('express-session');
-const bodyParser = require('body-parser');
 const hbs = require('hbs') // using hbs template engine
 
 const app = express();
@@ -109,12 +106,8 @@ app.post('/users/search', (req, res) => {
     else if (body.id) {
         user = users.find(u => u.id === parseInt(body.id));
     }
-    if(!user) {
+    if(!user || user.disabled) {
         return res.status(404).send(`User Not Found`);
-    }
-
-    if (user.disabled) {
-        return res.send(`This User is temporarily disabled`)
     }
     res.redirect(`/users/${user.id}`);
 })
@@ -122,14 +115,9 @@ app.post('/users/search', (req, res) => {
 app.get('/users/:id', (req, res) => {
     const id = parseInt(req.params.id);
     const user = users.find(u => u.id === id);
-    if(!user) {
+    if(!user || user.disabled) {
         return res.status(404).send(`User Not Found`);
     }
-
-    if (user.disabled) {
-        return res.send(`This User is temporarily disabled`)
-    }
-
     res.render('getUser.hbs', user);
 })
 
@@ -140,11 +128,7 @@ app.post('/users/:id', (req, res) => {
     const index = users.indexOf(user);
     users.splice(index, 1);
 
-    if (user.disabled) {
-        return res.send(`This User is temporarily disabled`)
-    }
-
-    if(!user) {
+    if(!user || user.disabled) {
         return res.status(404).send(`User Not Found`);
     }
     res.redirect('/');
@@ -155,11 +139,7 @@ app.get('/users/:id/edit', (req, res) => {
     const id = parseInt(req.params.id);
     const user = users.find(u => u.id === id);
 
-    if (user.disabled) {
-        return res.send(`This User is temporarily disabled`)
-    }
-
-    if(!user) {
+    if(!user || user.disabled) {
         return res.status(404).send(`User Not Found`);
     }
     res.render('editUser.hbs', user);
@@ -188,16 +168,12 @@ app.get('/users/:id/cars/:VIN/edit', (req, res) => {
     let car = user.cars.find(c => c.VIN === VIN);
 
     if (user.disabled) {
-        return res.send(`Owner of this car is temporarily Disabled`)
-    }
-
-    if (car.disabled) {
-        return res.send(`Car was temporarily Disabled`)
+        return res.send(`Use not Found`)
     }
 
     if (!user.cars.length) {
         return res.status(404).send(`<p>This user does not have any car`)
-    } else if(!car) {
+    } else if(!car || car.disabled) {
         return res.status(404).send(`<p>This user does not own this car`)
     }
     res.render('editCar.hbs', {user, car});
@@ -226,8 +202,8 @@ app.post('/users/:id/cars/:VIN/edit', (req, res) => {
             user.cars.splice(usersCarIndex, 1);
             car.lastOwner = user;
             owner.cars.push(car);
-            car.edit(make, model, VIN, govID, color, owner)
-            return res.redirect(`/users/${id}`)
+            car.edit(make, model, VIN, govID, color, owner);
+            return res.redirect(`/users/${id}`);
         }
     }
 
@@ -249,7 +225,7 @@ app.get('/users/:id/cars/add', (req, res) => {
     let user = users.find(u => u.id === id);
 
     if (user.disabled) {
-        return res.send(`This User is temporarily Disabled`)
+        return res.send(`User not Found`);
     }
 
     res.render('addCar.hbs', {name: user.name, surname: user.surname})
@@ -295,33 +271,33 @@ app.post('/cars/search', (req, res) => {
     if (make && model) {
         const car = cars.find(c => c.make === make && c.model === model);
         if (car.owner.disabled) {
-            return res.send(`Owner of this car is temporarily Disabled`)
+            return res.send(`User not Found`)
         }
     
         if (car.disabled) {
-            return res.send(`Car was temporarily Disabled`)
+            return res.send(`Car not Found`)
         }
         return res.redirect(`/cars/${car.VIN}`)
     }
     else if (VIN) {
         const car = cars.find(c => c.VIN === VIN);
         if (car.owner.disabled) {
-            return res.send(`Owner of this car is temporarily Disabled`)
+            return res.send(`User not Found`)
         }
     
         if (car.disabled) {
-            return res.send(`Car was temporarily Disabled`)
+            return res.send(`Car not Found`)
         }
         return res.redirect(`/cars/${car.VIN}`)
     }
     else if (govID) {
         const car = cars.find(c => c.govID === govID);
         if (car.owner.disabled) {
-            return res.send(`Owner of this car is temporarily Disabled`)
+            return res.send(`User not Found`)
         }
     
         if (car.disabled) {
-            return res.send(`Car was temporarily Disabled`)
+            return res.send(`Car not Found`)
         }
         return res.redirect(`/cars/${car.VIN}`);
     }
@@ -351,7 +327,7 @@ app.get('/cars/:VIN/delete', (req, res) => {
 
 // Admin Panel
 app.get('/admin', (req, res) => {
-    res.render('admin.hbs')
+    res.render('admin.hbs');
 })
 
 // searching users, or cars
@@ -429,7 +405,7 @@ app.post('/admin/user/:id', (req, res) => {
     else if (disable) {
         user.disabled = true;
     }
-    res.redirect('/admin')
+    res.redirect('/admin');
 })
 
 // configuring car
