@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>JS DEMO</title>
+</head>
+<body>
+    <script>
+        let persons = [
+            { name: 'Vaxo', age: 23, id: 1 },
+            { name: 'Grigoli', age: 20, id: 2 },
+            { name: 'Mamuka', age: 20, id: 3 },
+            { name: 'Salome', age: 17, id: 4 },
+        ];
+
+        let personsHTML = persons.map( (person) => `<p>User - ${person.name}, Id - ${person.id}</p>` );
+
+        let personsFilter = persons.filter( (person) => person.age <= 19 )
+        .map( (person) => `<p>User - ${person.name}, Id - ${person.id}</p>` );
+        
+        let personsReduced = persons.reduce( (total, person) => {
+            return total += `<p>User - ${person.name}, Id - ${person.id}</p>`;
+        }, '' );
+        // console.log(personsReduced);
+        // console.table(personsHTML);
+        // console.log(personsFilter);
+        document.body.innerHTML = personsHTML.join(' ');
+        document.body.innerHTML += '<hr/>';
+        document.body.innerHTML += personsFilter;
+        document.body.innerHTML += '<hr/>';
+        document.body.innerHTML += personsReduced;
+        document.body.innerHTML += '<hr/>';
+
+        // persons.customReduce = function( callback, sum ) {
+        //     // console.log(callback.arguments);
+        //     console.log(callback);
+        //     for (let i = 0; i < persons.length; i++) {
+        //         callback( sum, persons[i] )
+        //     }
+        // }
+        Array.prototype.customReduce = function( callback, total ) {
+            for (let i = 0; i < this.length; i++) {
+                total = callback( total, this[i] )
+            }
+            return total;
+        }
+        
+        let reduced = persons.customReduce( (total, person) => {
+            return total += `<p>User - ${person.name}, Id - ${person.id}</p>`;
+        }, '' );
+        console.log(reduced);
+    </script>
+</body>
+</html>
