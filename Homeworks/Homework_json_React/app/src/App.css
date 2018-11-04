@@ -1,0 +1,22 @@
+.posts, .albums, .comments, .photos, .todos, .users {
+  border: 2px solid seagreen;
+  padding: 5px 15px;
+  margin: 15px;
+  cursor: pointer;
+  transition: all 0.5s ease;
+}
+
+.posts:hover, .albums:hover, .comments:hover, .photos:hover, .todos:hover, .users:hover {
+  background-color: rgb(46, 95, 95);
+  color: white;
+}
+
+a {
+  padding: 2px 5px ;
+}
+a:hover {
+  text-decoration: none;
+  color: white;
+  border: 1px solid rgb(54, 43, 43);
+  background: rgb(64, 136, 136);
+}
