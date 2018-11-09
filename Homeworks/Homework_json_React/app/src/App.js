@@ -28,7 +28,7 @@ class App extends Component {
         {/* Comments */}
         { ( !!this.state.data && url.endsWith('comments') ) && <Comments length={25} data={this.state.data}/> } 
         {/* Photos */}
-        { ( !!this.state.data && url.endsWith('photos') ) && <Photos length={40} data={this.state.data}/> } 
+        { ( !!this.state.data && url.endsWith(      'photos') ) && <Photos length={40} data={this.state.data}/> } 
         {/* Todos */}
         { ( !!this.state.data && url.endsWith('todos') ) && <Todos length={35} data={this.state.data}/> } 
         {/* Users */}
