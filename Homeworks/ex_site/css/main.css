@@ -28,14 +28,18 @@ html {
 }
 
 .header--wrapper button:hover {
-    background-color: antiquewhite;
+    background-color: rgb(209, 209, 209);
     cursor: pointer;
 }
 
 .header--wrapper h1 {
-    font-size: 3em;
+    margin-bottom: 10px;
+    font-size: 4.5em;
+    font-family: 'lobster', cursive;
 }
 .header--wrapper p {
+    letter-spacing: 3px;
+    font-size: 1.5em;
     margin-top: 0;
 }
 
@@ -43,7 +47,7 @@ html {
     list-style-type: none;
     margin: 0;
     padding: 0;
-    padding-top: 30px;
+    padding-top: 15px;
     display: flex;
     justify-content: center;
     text-align: center;
@@ -51,11 +55,12 @@ html {
 .nav-wrapper ul a {
     outline: none;
     text-decoration: none;
-    color: rgb(255, 230, 230);
+    color: white;
+    font-weight: bold;
 }
 
 .nav-wrapper ul a:hover {
-    color: white;
+    color: rgb(226, 225, 225);
 }
 
 .nav-wrapper ul li {
@@ -68,6 +73,7 @@ html {
 .logo {
     padding: 10px 50px 0;
     font-size: 2em;
+    font-family: 'lobster', cursive;
 }
 
 footer {
@@ -130,40 +136,45 @@ hr {
 }
 
 footer form {
+    height: 40px;
     margin-top: 50px;
     position: relative;
 }
 footer input {
     border: 0;
     border-radius: 25px;
+    height: 100%;
+    padding: 0;
     width: 400px;
-    padding: 10px 10px;
 }
 
 footer button {
     border: 0;
     background-color: #53d7d7;
-    padding: 12px 25px;
     border-radius: 25px;
+    color: white;
+    cursor: pointer;
+    font-size: 13px;
+    height: 100%;
+    padding: 12px 25px;
     position: absolute;
     right: 0px;
-    color: white;
-    font-size: 13px;
-    cursor: pointer;
 }
 
 .follow {
+    align-items: flex-end;
+    align-content: space-between;
     display: flex;
     flex-wrap: wrap;
-    align-items: flex-end;
     width: 400px;
 }
 
 .follow h2 {
-    width: 100%;
     border-bottom: 1px solid white;
+    font-size: 2.5em;
+    font-family: 'lobster', cursive;
     padding-bottom: 15px;
-    margin: 0;
+    width: 100%;
 }
 
 .follow h5 {
@@ -179,8 +190,126 @@ footer button {
     border-radius: 15px;
     margin-left: 5px;
     outline: none;
+    text-align: center;
+    text-decoration: none;
+    width: 18px;
 }
 
-.fa:hover {
-    background-color: antiquewhite;
+.fa-facebook:hover {
+    background-color: rgb(70, 70, 255);
+    color: white;
+}
+.fa-twitter:hover {
+    background-color: rgb(115, 182, 204);
+    color: white;
+}
+.fa-linkedin:hover {
+    background-color: rgb(56, 56, 212);
+    color: white;
+}
+.fa-instagram:hover {
+    background-color: rgb(201, 20, 20);
+    color: white;
+}
+.fa-pinterest:hover {
+    background-color: rgb(223, 60, 1);
+    color: white;
+}
+
+.socials {
+    display: flex;
+    padding-bottom: 21px;
+    width: 100%;
+}
+
+.travel-images {
+    display: flex;
+    flex-wrap: wrap;
+    height: 500px;
+    width: 100%;
+    margin: 50px 0px;
+}
+
+.travel-images div {
+    width: 33.33%;
+    position: relative;
+}
+
+.travel-images p {
+    text-align: center;
+    height: 40px;
+    margin-top: 90px;
+    color: white;
+    font-family: 'lobster', cursive;
+    font-size: 2.5em;
+}
+
+.travel-images div img {
+    width: 100%;
+    height: 250px;
+    position: absolute;
+    z-index: -1;
+}
+
+.effective-header {
+    width: 70%;
+    margin: 150px auto 0;
+    color: rgb(0, 0, 53);
+    font-size: 2em;
+    font-weight: 800;
+}
+
+
+.hello-message {
+    align-items: center;
+    box-shadow: 0px 10px 15px 3px rgb(230, 230, 230);
+    display: flex;
+    flex-direction: column;
+    margin: 120px auto 100px;
+    justify-content: center;
+    width: 800px;
+    padding-bottom: 50px;
+}
+.hello-message textarea, .email {
+    background: rgb(235, 235, 235);
+    border: none;
+    box-sizing: border-box;
+    color: rgb(146, 146, 146);
+    font-weight: bold;
+    margin-top: 15px;
+    padding: 12px;
+    width: 600px;
+}
+.hello-message textarea {
+    height: 125px;
+    resize: none;
+}
+.name {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    width: 600px;
+}
+.name input {
+    border: 0;
+    background: rgb(235, 235, 235);
+    color: rgb(146, 146, 146);
+    font-weight: bold;
+    padding: 12px;
+    width: 44%;
+}
+.hello-message button {
+    border: 0;
+    background-color: #53d7d7;
+    border-radius: 25px;
+    color: white;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+    margin-top: 40px;
+    padding: 12px 25px;
+}
+.hello-message h3 {
+    font-size: 2.2em;
+    color: #222;
 }
