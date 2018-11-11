@@ -14,8 +14,9 @@ function Form({ onSubmit }) {
         >
             <div className="input-group">
                 <input type="text" className="form-control form-control-sm" ref={ inp => input = inp } />
+                <span>&nbsp;</span>
                 <span className="input-group-btn">
-                    <button className="btn btn-secondary">Save</button>
+                    <button className="btn btn-success">Save</button>
                 </span>
             </div>
 

@@ -1,18 +1,22 @@
 [
     {
         "name": "Demo Title",
+        "done": false,
         "id": 0
     },
     {
         "name": "Lorem Ipsum",
+        "done": true,
         "id": 1
     },
     {
         "name": "Dolor Sit",
+        "done": true,
         "id": 2
     },
     {
         "name": "Javascript (ES6)",
+        "done": false,
         "id": 3
     }
 ]

@@ -15,6 +15,10 @@ app.use( express.json() );
 
 app.use( (req, res, next) => {
     res.setHeader('Cache-Control', 'no-cache');     // cache agar moxdeba
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Headers', '*');
+    res.setHeader('Access-Control-Allow-Methods', '*');
+
     next();
 } )
 
@@ -35,16 +39,16 @@ app.listen( app.get('port'), () => {
     console.log(`Listening on http://localhost:${app.get('port')}`);
 } )
 
-function b(f) {
-    f();
-}
+// function b(f) {
+//     f();
+// }
 
-function hof2() {
-    return function() {
+// function hof2() {
+//     return function() {
         
-    }
-}
+//     }
+// }
 
-function hof3() {
-    return b;
-}
+// function hof3() {
+//     return b;
+// }
