@@ -1,0 +1,112 @@
+* {
+  box-sizing: border-box;
+  color: #7d78a1;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+}
+
+header nav {
+  align-items: center;
+  border: 1px solid rgb(196, 196, 196);
+  border-radius: 40px;
+  display: flex;
+  height: 60px;
+  margin: auto;
+  justify-content: space-around;
+  width: 600px;
+}
+
+header nav a {
+  display: block;
+  text-decoration: none;
+  height: 100%;
+  line-height: 60px;
+}
+
+header nav a:hover {
+  border-bottom: 1px solid orangered;
+}
+
+.login {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100px;
+}
+
+.login i {
+  font-size: 2em;
+}
+
+.main--wrapper {
+  background-image: url('/images/background.jpg');
+  background-repeat: no-repeat;
+  background-position: left 810px top 0;
+  height: 1000px;
+}
+
+header,
+.main--wrapper__section,
+.design--section,
+.making--ideas__header {
+  width: 75%;
+  margin: 0 auto;
+}
+
+.design--section {
+  display: flex;
+  flex-wrap: nowrap;
+}
+
+.design--section__main {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.section__main__header, .section__main__paragraph {
+  width: 100%;
+  height: 50%;
+}
+
+.section__images {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.section__images img {
+  width: 50%;
+  background: #222;
+}
+
+.making--ideas__header h3 {
+  font-size: 2.5em;
+  width: 300px;
+}
+
+.making--ideas__image {
+  align-items: center;
+  display: flex;
+  margin: 0 auto;
+  justify-content: space-around;
+  width: 90%;
+}
+
+.making--ideas__image img {
+  width: 60%;
+}
+
+.making--ideas__image div {
+  align-items: center;
+  padding: 0;
+  align-content: center;
+  border: 1px solid rgb(196, 196, 196);
+  border-radius: 100px;
+  display: flex;
+  font-size: 3em;
+  height: 100px;
+  justify-content: center;
+  width: 100px;
+}
