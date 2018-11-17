@@ -1,5 +1,5 @@
 import React from 'react';
-import Button from '../../buttons/Button';
+import Button from '../../Button';
 
 const IdeasParagraph = (props) => (
     <div className="making--ideas__paragraph">

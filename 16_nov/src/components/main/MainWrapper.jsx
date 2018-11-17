@@ -1,6 +1,6 @@
 import React from 'react';
-import Icon from '../icons/Icon';
-import Button from '../buttons/Button';
+import Icon from '../Icon';
+import Button from '../Button';
 
 const MainWrapper = () => {
     const renderCircles = () => {

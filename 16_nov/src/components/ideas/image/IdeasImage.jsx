@@ -1,6 +1,6 @@
 import React from 'react';
-import Image from '../../images/Image';
-import Icon from '../../icons/Icon';
+import Image from '../../Image';
+import Icon from '../../Icon';
 
 const IdeasImage = () => (
     <div className="making--ideas__image">

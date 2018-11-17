@@ -1,19 +1,12 @@
 import React from 'react';
 import Nav from '../navigation/Nav';
-import Icon from '../icons/Icon';
-
-const links = [
-    { page: 'HOME', link: '#' },
-    { page: 'PRODUCTS', link: '#' },
-    { page: 'AWARDS', link: '#' },
-    { page: 'CONTACT US', link: '#' },
-]
+import Icon from '../Icon';
 
 const Header = (props) => {
     return (
         <header>
             <h1>Dopos</h1>
-            <Nav links={links} />
+            <Nav links={props.links} />
             <div className="login">
                 <p>LOG IN</p>
                 <Icon className={"fas fa-user-circle"} />

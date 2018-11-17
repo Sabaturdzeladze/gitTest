@@ -1,6 +1,6 @@
 import React from 'react';
-import Image from '../images/Image';
-import Button from '../buttons/Button';
+import Image from '../Image';
+import Button from '../Button';
 
 const images = [
     "/images/sect1.jpg",

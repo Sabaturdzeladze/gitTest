@@ -1,5 +1,5 @@
 import React from 'react';
-import Link from '../links/Link';
+import Link from '../Link';
 
 const Nav = (props) => {
     return (
