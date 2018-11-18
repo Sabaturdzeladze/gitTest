@@ -1,13 +1,18 @@
 import React from 'react';
 import Image from '../../Image';
-import Icon from '../../Icon';
+import LeftArrow from '../../slider/LeftArrow';
+import RightArrow from '../../slider/RightArrow';
 
-const IdeasImage = () => (
-    <div className="making--ideas__image">
-      <div><Icon className={"fas fa-arrow-left"}/></div>
-      <Image src={"/images/bckg.jpg"} />
-      <div><Icon className={"fas fa-arrow-right"}/></div>
-    </div>
+const IdeasImage = (props) => (
+  <div className="making--ideas__image">
+    <LeftArrow
+      prevSlide={props.prevSlide}
+    />
+    <Image src={props.image} />
+    <RightArrow
+      nextSlide={props.nextSlide}
+    />
+  </div>
 );
 
 export default IdeasImage;

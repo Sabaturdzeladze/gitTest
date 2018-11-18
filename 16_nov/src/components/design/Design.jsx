@@ -3,10 +3,10 @@ import Image from '../Image';
 import Button from '../Button';
 
 const images = [
-    "/images/sect1.jpg",
-    "/images/sect2.jpg",
-    "/images/sect3.jpg",
     "/images/sect4.jpg",
+    "/images/sect3.jpg",
+    "/images/sect2.jpg",
+    "/images/sect1.jpg",
 ]
 
 const Design = (props) => (

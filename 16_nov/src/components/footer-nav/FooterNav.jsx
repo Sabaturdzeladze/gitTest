@@ -4,7 +4,7 @@ import Icon from '../Icon';
 
 const FooterNav = (props) => {
     return (
-        <div class="footer--nav">
+        <div className="footer--nav">
             <h3>Dopos</h3>
             <Nav links={props.links} />
             <div className="social">

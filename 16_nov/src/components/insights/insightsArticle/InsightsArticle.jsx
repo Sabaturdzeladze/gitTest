@@ -2,7 +2,7 @@ import React from 'react';
 import Link from '../../Link';
 
 const InsightsArticle = () => (
-    <div class="insights--header__article">
+    <div className="insights--header__article">
       <h4>While Others Talk We Listen.</h4>
       <span>oct. 16, 2018</span>
       <p>
