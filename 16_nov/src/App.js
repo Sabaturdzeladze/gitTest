@@ -18,12 +18,16 @@ const links = [
 
 
 class App extends Component {
+  state = {
+    name: 'name'
+  }
+  
   render() {
     return (
       <Router>
         <div className="App">
           <Header links={links} />
-          <Route path="/" component={Main} exact />
+          <Route path="/" render={() => (<Main name={this.state.name}/>)} exact />
           <Route path="/awards" component={Awards} />
           <Route path="/products" component={Products} />
           <Route path="/contact" component={Contact} />
