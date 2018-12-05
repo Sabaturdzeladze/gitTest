@@ -14,7 +14,7 @@ const Index = () => {
 // match, history, location
 const Product = ({ match }) => (
   <div>
-    <h2>{match.params.category.toUpperCase()}</h2>
+    <h2>Category: {match.params.category.toUpperCase()}</h2>
   </div>
 );
 
