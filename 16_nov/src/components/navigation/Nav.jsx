@@ -1,5 +1,5 @@
 import React from 'react';
-import Link from '../Link';
+import { Link } from 'react-router-dom';
 
 const Nav = (props) => {
     return (
@@ -8,9 +8,8 @@ const Nav = (props) => {
                 props.links.map( (item, index) => (
                     <Link
                         key={index}
-                        link={item.link}
-                        page={item.page}
-                    />
+                        to={item.link}
+                    >{item.page}</Link>
                 ))
             }
         </nav>
